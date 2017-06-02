@@ -32,7 +32,7 @@ const getUrlDef='/:type';
 
 //valid url's
 var validRequestEntities={
-                            "post":["thyrocareBook/","freshlead/","shrouded-everglades-23668.herokuapp.com/"],
+                            "post":["thyrocareBook/","freshlead/"],
                             "get":["GetReport/","GetProducts/"]
                          };
 
