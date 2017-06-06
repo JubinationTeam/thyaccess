@@ -38,7 +38,7 @@ function parserRequestFactory(model){
 }
 
 function parserRequest(model){
-    
+    console.log("PARSER REQUEST")
          var createAccountSetup={
                         "mod"       : "parser",
                         "data"      :model.data
@@ -53,7 +53,7 @@ function parserRequest(model){
     
         request(xmlRequestParams, function (error, response, body){
             
-                console.log("PARSER REQUEST")
+                
                     
                 if(body){
                             body=JSON.parse(body);
