@@ -51,7 +51,7 @@ function xmlRequest(model){
                 if(body){
                             body=JSON.parse(body);
                             if(body.URL){
-                            console.log("REPORT URL PRESENT")
+                            console.log("XML REPORT URL PRESENT")
                             model.data.thyrocareXmlUrl=body.URL; 
                             
                             global.emit("parserRequestSetup",model)

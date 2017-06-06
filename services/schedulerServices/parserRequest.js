@@ -35,10 +35,10 @@ function parserRequestSetup(model)
 
 function parserRequestFactory(model){
     new parserRequest(model);
+    console.log("PARSER REQUEST")
 }
 
 function parserRequest(model){
-    console.log("PARSER REQUEST")
          var createAccountSetup={
                         "mod"       : "parser",
                         "data"      :model.data
