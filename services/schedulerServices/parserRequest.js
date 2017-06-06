@@ -57,6 +57,7 @@ function parserRequest(model){
                     
                 if(body){
                             body=JSON.parse(body);
+                            console.log(body)
                             if(body.URL){
                             console.log("PARSER DETAILS PRESENT")
                             model.data.testReport=body
