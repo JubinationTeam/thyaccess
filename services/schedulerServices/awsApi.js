@@ -2,14 +2,9 @@
 
 //node dependencies
 var request = require('request');
-var eventEmitter = require('events');
 
 //user defined dependencies
 var commonVar=require('./helper/staticVariables.js')
-
-//function specific event instance
-class eventClass extends eventEmitter{}
-const event = new eventClass()
 
 // event names
 var globalDataAccessCall;
@@ -47,14 +42,12 @@ function setupAwsFactory(model){
 
 function awsApiCall(model){
     
-     var mobile=model.data.mobile;
-     var leadId=model.data.thyrocareTags.leadId;
         var awsParams={
                         "mod"       : "aws",
                         "operation" : "awsQuery",
                         "data"      : {	    
-                                           "url":model.data.thyrocareUrl,
-                                           "key":mobile+"_"+leadId+".pdf"
+                                           "url":model.data.thyrocarePdfUrl,
+                                           "key":model.data.mobile+"_"+model.data.leadId+".pdf"
                                     }
 
                 };
@@ -74,21 +67,42 @@ function awsApiCall(model){
                             
                             console.log("LINK PRESENT")
                             model.data.s3Link=body.link
+                            //add model.data
                             commonVar.add()
-                            commonVar.push(model.data)
                             commonVar.check()
+                            model.aws=true;
+                            
+                            global.emit("readGuardSetup",model)
+                            model.emit("readGuard",model)
+                            
+//                            global.emit("updateLocalDatabaseSetup",model)
+//                            model.emit("updateLocalDatabase",model)
                             
                            }
                         else{
+                            
                             commonVar.add()
                             commonVar.check()
                             console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
                         }
                 }
+                else if(response){
+                        commonVar.add()
+                        commonVar.check()
+                        model.info=response;
+                        model.emit(globalCallBackRouter,model)
+                    }
+                else if(error){
+                        //console.log(error);
+                        commonVar.add()
+                        commonVar.check()
+                        model.info=error;
+                        model.emit(globalCallBackRouter,model)
+                    }
                 else{
-                    commonVar.add()
-                    commonVar.check()
-                    console.log("Error while querying AWS API : Thyrocare API \n");
+                        commonVar.add()
+                        commonVar.check()
+                        console.log("Error while querying AWS API : Thyrocare API \n");
                 }
             
         }); 

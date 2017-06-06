@@ -23,7 +23,6 @@ commonVar=module.exports={
         commonVar.batchDone=true
         commonVar.completedDocs=0
         commonVar.totalDocs=0
-        doc.getDocs(commonVar.docArray)
         console.log("Batch Done")
         }
     },

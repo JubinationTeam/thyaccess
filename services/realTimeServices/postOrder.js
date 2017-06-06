@@ -60,24 +60,24 @@ function packageCreator(model){
                 beneficiaryxml+="</NewDataSet>"
     
                 model.package={
-                            "api_key":thyrocareKey,
-                            "orderid":model.data.leadId,
-                            "address":model.data.address,
-                            "pincode":model.data.pincode,
-                            "product":model.data.product,
-                            "mobile":model.data.mobile,
-                            "email":model.data.email,
-                            "service_type":"H",
-                            "order_by":model.data.name,
-                            "report_code":"",
-                            "rate":model.data.amount,
-                            "hc":model.data.tags[0].handlingCharges,
-                            "appt_date":model.data.tags[0].apptDate,
-                            "reports":model.data.tags[0].hardCopy,
-                            "ref_code":"9930421623",
-                            "pay_type":"Postpaid",
-                            "bencount":model.data.tags[0].noOfPersons,
-                            "bendataxml":beneficiaryxml
+                            "api_key"       :thyrocareKey,
+                            "orderid"       :model.data.leadId,
+                            "address"       :model.data.address,
+                            "pincode"       :model.data.pincode,
+                            "product"       :model.data.product,
+                            "mobile"        :model.data.mobile,
+                            "email"         :model.data.email,
+                            "service_type"  :"H",
+                            "order_by"      :model.data.name,
+                            "report_code"   :"",
+                            "rate"          :model.data.amount,
+                            "hc"            :model.data.tags[0].handlingCharges,
+                            "appt_date"     :model.data.tags[0].apptDate,
+                            "reports"       :model.data.tags[0].hardCopy,
+                            "ref_code"      :"9930421623",
+                            "pay_type"      :"Postpaid",
+                            "bencount"      :model.data.tags[0].noOfPersons,
+                            "bendataxml"    :beneficiaryxml
                     }
             
            new postOrderFactory(model);
@@ -88,8 +88,6 @@ function postOrderFactory(model){
 }
  
 function postOrder(model){
-    
-    ////console.log(model.data.tags[0])
     
     var requestParams     = {
                             url     : thyrocareUrl,

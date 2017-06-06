@@ -61,6 +61,7 @@ function setupLeadDetailsFunction(model){
                                 }
 
                 };
+        
         var leadDetailsRequestParams     = {
                     url     : commonAccessUrl,
                     method  : 'POST',
@@ -72,8 +73,9 @@ function setupLeadDetailsFunction(model){
                     
                 if(body){        
                         body=JSON.parse(body);
-                        event.on("callgetLeaDocument",getLeadDocument)
-                        event.emit("callgetLeaDocument",model,body)
+                        console.log(body)
+                        event.on("callgetLeadDocument",getLeadDocument)
+                        event.emit("callgetLeadDocument",model,body)
                 }
                 else if(response){
                         model.info=response;

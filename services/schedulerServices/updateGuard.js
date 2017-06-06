@@ -14,7 +14,7 @@ var globalCallBackRouter;
 
 //Guard Access Variables
 var commonAccessUrl;
-var guardKey;
+var guardKey; 
 
 // global event emitter
 var global;
@@ -35,6 +35,8 @@ function init(globalEmitter,globalCall,globalDACall,callback,url,key){
     guardKey=key;
 }
 
+//    model.data.tags[0].vendorId="thyrocare";
+//    model.data.tags[0].leadId=model.data.leadId;
 function setup()
 {
     model.once("updateGuard",updateGuardFactory);
@@ -52,9 +54,9 @@ function updateGuard(model,modelIndex){
                             "data"      : {
                                             "key"   : guardKey,
                                             "schema": "Lead",
-                                            "id"    :model["readDoc"+modelIndex].docToUpdate,
+                                            "id"    :model.docToUpdateInLead,
                                             "data"  :{
-                                                        "tags":model["readDoc"+modelIndex].tags
+                                                        "tags":[model.newTags]
                                             }
                                 }
                 };

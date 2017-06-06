@@ -68,6 +68,8 @@ function update(model){
         if(body){
                 body=JSON.parse(body);
                 model.leadData=model.data;
+                global.emit("createAccountSetup",model)
+                model.emit("createAccountService",model)
                 model.beneficiaryIndex=0
                 saveReportDetails(model);
                     

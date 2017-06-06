@@ -2,7 +2,7 @@
 
 //node dependencies
 
-var Lead=require('./../../models/schemas/lead.js')
+var thyrocareLead=require('./../../models/schemas/thyrocareLead.js')
 
 // event names
 var globalDataAccessCall;
@@ -23,28 +23,19 @@ function setup(){
     model.once("updateLocalDatabase",updateLocalDatabase);
 }
 
-
-function updateLocalDatabase(model,modelIndex,beneficiaryIndex){
-    model["readDoc"+modelIndex].tags[0].thyrocareLeadDetails[beneficiaryIndex].reportStatus="true";
+function updateLocalDatabase(model){
+    model.schema=thyrocareLead
     model.dbOpsType="update"
-    model.id=model["readDoc"+modelIndex]._id
-    model.data={
-            
-            "tags":model["readDoc"+modelIndex].tags            
-    }
-    model.callBackFromDataAccess="callBackUpdateLocalDb"
+    model.id=model.data._id
+    model.data={"reportStatus":true};
     global.emit(globalDataAccessCall,model)
     model.emit(model.dbOpsType,model)
-    model.on("callBackUpdateLocalDb",callHandler)
-
 }
 
 function callHandler(model){
     model.info=model.status;
     model.emit(globalCallBackRouter,model)
 }
-
-
 
 //exports
 module.exports.init=init;

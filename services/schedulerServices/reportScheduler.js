@@ -8,9 +8,6 @@ var commonVar=require('./helper/staticVariables.js')
 var request = require('request');
 var eventEmitter = require('events');
 
-//schema instance
-var ThyrocareLead=require('./../../models/schemas/thyrocareLead.js')
-
 //booking date threshold value
 const days=20;
 
@@ -32,11 +29,11 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback){
+function init(globalEmitter,globalDACall,callback){
     
-    globalDataAccessCall=globalCall
+    globalDataAccessCall=globalDACall
     
-    setInterval(function(){
+    setTimeout(function(){
     if(commonVar.getBatchDoneBool()){
         commonVar.setBatchDone()
         
@@ -82,7 +79,7 @@ function looping(model){
             var bookingThresholdDate = new Date(Date.parse(bookingDate) + days * 86400000 ).toISOString().slice(0,10).toString();
             
             if(!model.data.reportStatus&&todaysDate<bookingThresholdDate&&((todaysDate>bookingDate&&!apptDate)||(todaysDate>apptDate&&apptDate))){
-                    makeRequestfactory(model);
+                    makePdfRequestfactory(model);
             }
             else{
                     commonVar.add()
@@ -91,16 +88,13 @@ function looping(model){
     
 }
 
-function makeRequestfactory(model){
-    new makeRequest(model)
+function makePdfRequestfactory(model){
+    new makePdfRequest(model)
 }
 
-function makeRequest(model){
-    
-    var mobile=model.data.mobile;
-    var leadId=model.data.thythyrocareLeadId
-    
-    var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+leadId+"/pdf/"+mobile+"/Myreport"
+function makePdfRequest(model){
+
+    var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/pdf/"+model.data.mobile+"/Myreport"
         
         var requestParams   = {
                                 url     : thyrocareReportUrl,
@@ -117,65 +111,42 @@ function makeRequest(model){
                         {
                             
                             console.log("REPORT URL PRESENT")
-                            model.data.thyrocareUrl=body.URL; 
+                            model.data.thyrocarePdfUrl=body.URL; 
+                            
                             global.emit("awsApiSetup",model)
                             model.emit("awsService",model)
                             
-//                            model.emit("readGuard",model)
-                            
-//                            global.emit("updateLocalDbSetup")
-//                            model.emit("updateLocalDatabase",model)
-                            
-//                            localDatabaseUpdate(model)
+                            global.emit("xmlRequestSetup",model)
+                            model.emit("xmlRequestService",model)
+    
                         }
                     else{
                             console.log("REPORT URL NOT PRESENT")
-                        
-                            commonVar.push(model.data)
                             commonVar.add()
                             commonVar.check()
                             
                     }
                     
            }
-            else{
-                    commonVar.push(model.data)
+            else if(response){
+                    model.info=response;
+                    model.emit(globalCallBackRouter,model)
                     commonVar.add()
                     commonVar.check()
-                    
+                    }
+            else if(error){
+                    //console.log(error);
+                    model.info=error;
+                    model.emit(globalCallBackRouter,model)
+                    commonVar.add()
+                    commonVar.check()
+                }
+            else{
                     console.log("Error while scheduling report : Thyrocare API ");
+                    commonVar.add()
+                    commonVar.check()
             }
     })
-}
-
-function localDatabaseUpdate(model){
-
-    model.schema=ThyrocareLead
-    model.dbOpsType="read"
-    model.data={
-        "thyrocareLeadId":model.data.thyrocareLeadId
-    }
-
-    model.callBackFromDataAccess="localDbRead"
-    model.on(model.callBackFromDataAccess,(model)=>{
-
-        model.callBackFromDataAccess="localDbUpdated"
-        model.on(model.callBackFromDataAccess,(model)=>{model.emit(globalCallBackRouter,model);
-                                                  console.log(model.status)})
-        model.schema=ThyrocareLead
-        model.dbOpsType="update"
-        model.id=model.status[0]._id
-        model.data={
-                        "reportStatus":true
-        }
-        global.emit(globalDataAccessCall,model)
-        model.emit(model.dbOpsType,model)
-
-    })
-
-    global.emit(globalDataAccessCall,model)
-    model.emit(model.dbOpsType,model)
-
 }
 
 //exports

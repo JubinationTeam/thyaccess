@@ -51,7 +51,7 @@ function readGuard(model,modelIndex){
                     "schema": "Lead",
                     "pageNo":"1",
                     "data"  :{
-                                "leadId":model["readDoc"+modelIndex].leadId
+                                "leadId":model.data.leadId
                     }
         }
                       
@@ -72,9 +72,12 @@ function readGuard(model,modelIndex){
                     
                 if(body){        
                         body=JSON.parse(body);
-                        model["readDoc"+modelIndex].docToUpdate=body._id
+                        model.docToUpdateInLead=body.data._id
+                        model.newTags=body.data.tags[0]
+                        model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
+                        model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
                         global.emit("updateGuardSetup")
-                        model.emit("updateGuard",model,modelIndex)
+                        model.emit("updateGuard",model)
                 }
                 else{
                     console.log("Error while reading guard : Thyrocare API \n");

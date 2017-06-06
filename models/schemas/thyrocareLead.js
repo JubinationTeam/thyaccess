@@ -8,7 +8,7 @@ var thyrocareLead={
     mobile: String,
     bookingDate: String,
     apptDate: String,
-    thyrocareleadId: String,
+    thyrocareLeadId: String,
     reportStatus: Boolean
     };
 
