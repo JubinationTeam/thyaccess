@@ -85,6 +85,7 @@ function init(){
     readGuard(globalEmitter,'readGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
     updateGuard(globalEmitter,'updateGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
     genericDataAccess(dataAccessInitModel);
+
 }
 
 //exports
