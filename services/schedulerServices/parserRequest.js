@@ -64,10 +64,10 @@ function parserRequest(model){
 //                            global.emit("healthCheckupSetup",model)
 //                            model.emit("healthCheckup",model)
                             }
-                            else{
-                                    console.log("PARSER DETAILS NOT PRESENT")
-                                 
-                            }
+//                            else{
+//                                    console.log("PARSER DETAILS NOT PRESENT")
+//                                 
+//                            }
                     }
                 else if(response){
                             model.info=response;
