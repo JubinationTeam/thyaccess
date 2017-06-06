@@ -30,7 +30,7 @@ function init(globalEmitter,globalCall,globalDACall,callback,url){
 
 function parserRequestSetup(model)
 {
-    model.once("parserRequest",xmlRequestFactory);
+    model.once("parserRequest",parserRequestSetup);
 }
 
 function parserRequestFactory(model){
