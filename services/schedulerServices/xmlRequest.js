@@ -38,7 +38,7 @@ function xmlRequestFactory(model){
 
 function xmlRequest(model){
     
-      var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thythyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
+      var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
         
         var xmlRequestParams   = {
                                 url     : thyrocareReportUrl,
