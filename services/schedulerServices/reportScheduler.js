@@ -116,8 +116,8 @@ function makePdfRequest(model){
                             global.emit("awsApiSetup",model)
                             model.emit("awsService",model)
                             
-                            global.emit("xmlRequestSetup",model)
-                            model.emit("xmlRequestService",model)
+                            //global.emit("xmlRequestSetup",model)
+                            //model.emit("xmlRequestService",model)
     
                         }
                     else{
