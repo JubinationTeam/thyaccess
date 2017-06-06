@@ -42,6 +42,8 @@ function setupAwsFactory(model){
 
 function awsApiCall(model){
     
+    console.log("IM IN AWS")
+    
         var awsParams={
                         "mod"       : "aws",
                         "operation" : "awsQuery",
