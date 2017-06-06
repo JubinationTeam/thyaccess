@@ -42,14 +42,12 @@ function setupAwsFactory(model){
 
 function awsApiCall(model){
     
-    console.log("IM IN AWS")
-    
         var awsParams={
                         "mod"       : "aws",
                         "operation" : "awsQuery",
                         "data"      : {	    
                                            "url":model.data.thyrocarePdfUrl,
-                                           "key":model.data.mobile+"_"+model.data.leadId+".pdf"
+                                           "key":model.data.mobile+"_"+model.data.thyrocareLeadId+".pdf"
                                     }
 
                 };
