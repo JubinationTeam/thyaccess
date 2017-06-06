@@ -60,8 +60,6 @@ function awsApiCall(model){
     
         request(awsRequestParams, function (error, response, body){
             
-            console.log("After Request")
-            
                 if(body){ 
                     
                         body=JSON.parse(body);
@@ -82,31 +80,31 @@ function awsApiCall(model){
                             
                            }
                         else{
-                            
                             commonVar.add()
                             commonVar.check()
                             console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
                         }
                 }
                 else if(response){
+                        console.log(response+"::::::::")
                         commonVar.add()
                         commonVar.check()
                         model.info=response;
-                        model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
+                        console.log(error+"::::::::")
                         //console.log(error);
                         commonVar.add()
                         commonVar.check()
                         model.info=error;
-                        model.emit(globalCallBackRouter,model)
                     }
                 else{
                         commonVar.add()
                         commonVar.check()
                         console.log("Error while querying AWS API : Thyrocare API \n");
+                        model.info="Error while querying AWS API : Thyrocare API \n";
                 }
-            
+            global.emit(globalCallBackRouter,model)
         }); 
     
 }
