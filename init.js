@@ -59,7 +59,7 @@ var dataAccessInitModel={
     };
 
 const guardKey="5923f40e07b1c909d06487ad";
-const commonAccessUrl="http://localhost:8080/commonAccess/";
+const commonAccessUrl="https://ancient-shore-46511.herokuapp.com/";
 //const commonAccessUrl="https://ancient-shore-46511.herokuapp.com/commonAccess"
 
 const thyrocareUrls={
