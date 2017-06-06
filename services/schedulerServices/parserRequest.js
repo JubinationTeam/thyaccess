@@ -41,19 +41,19 @@ function parserRequest(model){
     
     console.log("PARSER REQUEST")
 
-    var createAccountSetup={
+    var parserRequestBody={
                         "mod"       : "parser",
                         "data"      :model.data
                     };
     
-    var createAccountRequestParams     = {
+    var parserRequestParams     = {
                             url     : commonAccessUrl,
                             method  : 'POST',
                             headers : headers,
-                            body    : JSON.stringify(createAccountSetup)
+                            body    : JSON.stringify(parserRequestBody)
                     }
     
-        request(xmlRequestParams, function (error, response, body){
+        request(parserRequestParams, function (error, response, body){
             
                 
                     
