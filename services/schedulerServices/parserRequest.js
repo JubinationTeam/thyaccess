@@ -54,8 +54,6 @@ function parserRequest(model){
                     }
     
         request(parserRequestParams, function (error, response, body){
-            
-                
                     
                 if(body){
                             body=JSON.parse(body);
