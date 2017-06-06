@@ -60,6 +60,8 @@ function awsApiCall(model){
     
         request(awsRequestParams, function (error, response, body){
             
+            console.log("IM IN REQUEST")
+            
                 if(body){ 
                     
                         body=JSON.parse(body);
