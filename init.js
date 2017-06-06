@@ -80,7 +80,7 @@ function init(){
     awsApi(globalEmitter,'awsApiSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
     reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)
     xmlRequest(globalEmitter,'xmlRequestSetup',globalDataAccessCall,globalCallBackRouter)
-    parserRequest(globalEmitter,'xmlRequestSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
+    parserRequest(globalEmitter,'parserRequestSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
     healthCheckup(globalEmitter,'healthCheckupSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
     readGuard(globalEmitter,'readGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
     updateGuard(globalEmitter,'updateGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)

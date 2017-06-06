@@ -113,11 +113,11 @@ function makePdfRequest(model){
                             console.log("REPORT URL PRESENT")
                             model.data.thyrocarePdfUrl=body.URL; 
                             
-                            global.emit("awsApiSetup",model)
-                            model.emit("awsService",model)
+//                            global.emit("awsApiSetup",model)
+//                            model.emit("awsService",model)
                             
-                            //global.emit("xmlRequestSetup",model)
-                            //model.emit("xmlRequestService",model)
+                            global.emit("xmlRequestSetup",model)
+                            model.emit("xmlRequestService",model)
     
                         }
                     else{

@@ -21,23 +21,23 @@ const headers     = {
 
 // function to instantiate
 function init(globalEmitter,globalCall,globalDACall,callback,url){
-    globalEmitter.on(globalCall,xmlRequestSetup)
+    globalEmitter.on(globalCall,parserRequestSetup)
     global=globalEmitter;
     globalDataAccessCall=globalDACall;
     globalCallBackRouter=callback;
     commonAccessUrl=url;
 }
 
-function xmlRequestSetup(model)
+function parserRequestSetup(model)
 {
     model.once("parserRequest",xmlRequestFactory);
 }
 
-function xmlRequestFactory(model){
-    new xmlRequest(model);
+function parserRequestFactory(model){
+    new parserRequest(model);
 }
 
-function xmlRequest(model){
+function parserRequest(model){
     
          var createAccountSetup={
                         "mod"       : "parser",
@@ -52,14 +52,16 @@ function xmlRequest(model){
                     }
     
         request(xmlRequestParams, function (error, response, body){
+            
+                console.log("PARSER REQUEST")
                     
                 if(body){
                             body=JSON.parse(body);
                             if(body.URL){
                             console.log("PARSER DETAILS PRESENT")
                             model.data.testReport=body
-                            global.emit("healthCheckupSetup",model)
-                            model.emit("healthCheckup",model)
+//                            global.emit("healthCheckupSetup",model)
+//                            model.emit("healthCheckup",model)
                             }
                             else{
                                     console.log("PARSER DETAILS NOT PRESENT")

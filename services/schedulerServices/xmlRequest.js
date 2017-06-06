@@ -47,44 +47,36 @@ function xmlRequest(model){
                 }
     
         request(xmlRequestParams, function (error, response, body){
-                    
+            
+            console.log("XML REQUEST")
+            
                 if(body){
                             body=JSON.parse(body);
                             if(body.URL){
-                            
+                            console.log(body.URL)
                             console.log("REPORT URL PRESENT")
                             model.data.thyrocareXmlUrl=body.URL; 
                             
-                            global.emit("awsApiSetup",model)
-                            model.emit("awsService",model)
+                            global.emit("parserRequestSetup",model)
+                            model.emit("parserRequest",model)
       
                         }
                             else{
                                     console.log("XML REPORT URL NOT PRESENT")
-                                    commonVar.add()
-                                    commonVar.check()
 
                             }
                     }
                 else if(response){
-                            commonVar.add()
-                            commonVar.check()
                             model.info=response;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
                             //console.log(error);
-                            commonVar.add()
-                            commonVar.check()
                             model.info=error;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else{
-                            commonVar.add()
-                            commonVar.check()
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
-                            model.emit(globalCallBackRouter,model)
                 }
+            global.emit(globalCallBackRouter,model)
     })  
 }
 
