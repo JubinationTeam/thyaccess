@@ -43,7 +43,7 @@ function parserRequest(model){
 
     var parserRequestBody={
                         "mod"       : "parser",
-                        "data"      :model.data
+                        "data"      : model.data
                     };
     
     var parserRequestParams     = {
