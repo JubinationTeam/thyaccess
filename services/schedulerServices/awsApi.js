@@ -63,8 +63,12 @@ function awsApiCall(model){
             console.log("IM IN REQUEST")
             
                 if(body){ 
-                    
+                        try{
                         body=JSON.parse(body);
+                        }
+                        catch(err){
+                            console.log(err+":::::::::::")
+                        }
                         if(body.link){
                             
                             console.log("LINK PRESENT")
