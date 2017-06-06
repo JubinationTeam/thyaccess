@@ -60,11 +60,12 @@ function awsApiCall(model){
     
         request(awsRequestParams, function (error, response, body){
             
-            console.log("IM IN REQUEST")
+            console.log(body)
             
                 if(body){ 
                         try{
                         body=JSON.parse(body);
+                            
                         }
                         catch(err){
                             console.log(err+":::::::::::")
