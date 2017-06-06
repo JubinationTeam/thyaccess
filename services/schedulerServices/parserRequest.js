@@ -30,16 +30,18 @@ function init(globalEmitter,globalCall,globalDACall,callback,url){
 
 function parserRequestSetup(model)
 {
-    model.once("parserRequest",parserRequestSetup);
+    model.once("parserRequest",parserRequestFactory);
 }
 
 function parserRequestFactory(model){
     new parserRequest(model);
-    console.log("PARSER REQUEST")
 }
 
 function parserRequest(model){
-         var createAccountSetup={
+    
+    console.log("PARSER REQUEST")
+
+    var createAccountSetup={
                         "mod"       : "parser",
                         "data"      :model.data
                     };
