@@ -19,7 +19,7 @@ function init(globalEmitter,globalCall,callback,globalDACall){
     globalCallBackRouter=callback;
 }
 
-function setup(){
+function setup(model){
     model.once("updateLocalDatabase",updateLocalDatabase);
 }
 
