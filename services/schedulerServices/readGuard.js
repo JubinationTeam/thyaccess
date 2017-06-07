@@ -77,7 +77,7 @@ function readGuard(model,modelIndex){
                             body=JSON.parse(body);
 //                        }
 //                        catch(err){
-                            model.info=err
+//                            model.info=err
 //                        }
                         console.log(body+"--------")
                         model.docToUpdateInLead=body.data._id
