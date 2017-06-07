@@ -39,7 +39,8 @@ function parserRequestFactory(model){
 
 function parserRequest(model){
     
-    console.log(model.data+"+++++++++++++++++")
+    console.log(model.data.thyrocarePdfUrl+"--")
+    console.log(model.data.thyrocareXmlUrl)
     
     console.log("PARSER REQUEST")
 
