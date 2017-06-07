@@ -37,10 +37,10 @@ function setup(model)
 
 function createHealthCheckupDocFactory(model){
     new createHealthCheckupDoc(model)
-}
+}         
 
 function createHealthCheckupDoc(model){
-    
+     
     var commonAccessDetails={
                         "mod"       : "guard",
                         "operation" : "create",
