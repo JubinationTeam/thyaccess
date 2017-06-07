@@ -74,7 +74,7 @@ function parserRequest(model){
                             }
                             console.log(body)
                             if(body.URL){
-                            console.log("PARSER DETAILS PRESENT")
+                            console.log("PARSER DETAILS EXIST")
                             model.data.testReport=body
 //                            global.emit("healthCheckupSetup",model)
 //                            model.emit("healthCheckup",model)
