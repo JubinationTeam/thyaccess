@@ -79,11 +79,11 @@ function readGuard(model,modelIndex){
                         catch(err){
                             model.info=err
                         }
+                        console.log(body.data+"--------")
                         model.docToUpdateInLead=body.data._id
                         model.newTags=body.data.tags[0]
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
-                        console.log(body.data)
 //                        global.emit("updateGuardSetup")
 //                        model.emit("updateGuard",model)
                 }
