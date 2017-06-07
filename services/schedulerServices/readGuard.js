@@ -84,7 +84,7 @@ function readGuard(model,modelIndex){
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
                         console.log(model.newTags)
-                        global.emit("updateGuardSetup")
+                        global.emit("updateGuardSetUp")
                         model.emit("updateGuard",model)
                 }
                 else if(response){
