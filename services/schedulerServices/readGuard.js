@@ -35,13 +35,13 @@ function init(globalEmitter,globalCall,globalDACall,callback,url,key){
     guardKey=key;
 }
 
-function setup()
+function setup(model)
 {
     model.once("readGuard",readGuardFactory);
 }
 
-function readGuardFactory(model,modelIndex){
-    new readGuard(model,modelIndex);
+function readGuardFactory(model){
+    new readGuard(model);
 }
 
 function readGuard(model,modelIndex){
