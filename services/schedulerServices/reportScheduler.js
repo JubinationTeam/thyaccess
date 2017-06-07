@@ -109,7 +109,7 @@ function makePdfRequest(model){
                     body=JSON.parse(body);
                     if(body.URL)
                         {
-                            
+                            console.log(body.URL+"uuuuuuuuuurrrrrrlllll")
                             console.log("REPORT URL PRESENT")
                             console.log(model.data+"^^^^^^^^^^^^^^^^^")
                             model.data.thyrocarePdfUrl=body.URL; 
