@@ -47,6 +47,9 @@ function updateGuardFactory(model,modelIndex){
 }
 
 function updateGuard(model,modelIndex){
+    
+      
+    console.log("IM IN UPDATE GUARD")
         
         var updateParams={
                             "mod"       : "guard",

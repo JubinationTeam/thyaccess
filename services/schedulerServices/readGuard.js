@@ -45,8 +45,7 @@ function readGuardFactory(model){
 }
 
 function readGuard(model,modelIndex){
-    
-    console.log("IM IN READ GUARD"+model.data)
+  
     
         var data={
                     "key"   : guardKey,
@@ -85,8 +84,8 @@ function readGuard(model,modelIndex){
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
                         console.log(model.newTags)
-//                        global.emit("updateGuardSetup")
-//                        model.emit("updateGuard",model)
+                        global.emit("updateGuardSetup")
+                        model.emit("updateGuard",model)
                 }
                 else if(response){
                             model.info=response;
