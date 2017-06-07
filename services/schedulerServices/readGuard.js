@@ -46,6 +46,8 @@ function readGuardFactory(model,modelIndex){
 
 function readGuard(model,modelIndex){
     
+    console.log("IM IN READ GUARD")
+    
         var data={
                     "key"   : guardKey,
                     "schema": "Lead",
