@@ -37,16 +37,16 @@ function init(globalEmitter,globalCall,globalDACall,callback,url,key){
 
 //    model.data.tags[0].vendorId="thyrocare";
 //    model.data.tags[0].leadId=model.data.leadId;
-function setup()
+function setup(model)
 {
     model.once("updateGuard",updateGuardFactory);
 }
 
-function updateGuardFactory(model,modelIndex){
-    new updateGuard(model,modelIndex);
+function updateGuardFactory(model){
+    new updateGuard(model);
 }
 
-function updateGuard(model,modelIndex){
+function updateGuard(model){
     
       
     console.log("IM IN UPDATE GUARD")
