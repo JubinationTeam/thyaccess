@@ -81,7 +81,7 @@ function awsApiCall(model){
                             
                             model.data.s3Link="dkfjhgbsdhjfgdsj"
         
-                            global.emit("readGuardSetup",model)
+                            global.emit("readGuardSetUp",model)
                             model.emit("readGuard",model)
                             
 //                            global.emit("xmlRequestSetup",model)
