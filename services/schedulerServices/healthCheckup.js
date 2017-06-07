@@ -67,7 +67,7 @@ function createHealthCheckupDoc(model){
                             headers : headers,
                             body    : JSON.stringify(commonAccessDetails)
                     }
-    request(updateRequestParams, function (error, response, body){
+    request(requestParams, function (error, response, body){
         
         if(body){
                 body=JSON.parse(body);
@@ -75,17 +75,16 @@ function createHealthCheckupDoc(model){
         }
         else if(response){
                 model.info=response;
-                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.logg(error);
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while updating lead details : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
         }
+    global.emit(globalCallBackRouter,model)
+
     }) 
 
 }
