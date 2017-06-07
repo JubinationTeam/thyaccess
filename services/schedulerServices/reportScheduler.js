@@ -106,7 +106,12 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
         
             if(body){
                     
-                    body=JSON.parse(body);
+                    try{
+                            body=JSON.parse(body);
+                            }
+                            catch(err){
+                                console.log(err)
+                            }
                     if(body.URL)
                         {
                             console.log(body.URL+"uuuuuuuuuurrrrrrlllll")

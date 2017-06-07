@@ -49,7 +49,12 @@ function xmlRequest(model){
         request(xmlRequestParams, function (error, response, body){
             
                 if(body){
+                            try{
                             body=JSON.parse(body);
+                            }
+                            catch(err){
+                                console.log(err)
+                            }
                             if(body.URL){
                             console.log("XML REPORT URL PRESENT")
                             model.thyrocareXmlUrl=body.URL; 
