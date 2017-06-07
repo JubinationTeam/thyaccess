@@ -116,11 +116,11 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                         {
                             console.log("REPORT URL PRESENT");
                             model.thyrocarePdfUrl=body.URL; 
-//                            global.emit("awsApiSetup",model)
-//                            model.emit("awsService",model)
+                            global.emit("awsApiSetup",model)
+                            model.emit("awsService",model)
                             
-                            global.emit("xmlRequestSetup",model)
-                            model.emit("xmlRequestService",model)
+//                            global.emit("xmlRequestSetup",model)
+//                            model.emit("xmlRequestService",model)
     
                         }
                     else{
