@@ -38,10 +38,10 @@ function xmlRequestFactory(model){
 
 function xmlRequest(model){
     
-      var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
+      model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
         
         var xmlRequestParams   = {
-                                url     : thyrocareReportUrl,
+                                url     : model.thyrocareReportUrl,
                                 method  : 'GET',
                                 headers : headers
                 }
@@ -52,7 +52,8 @@ function xmlRequest(model){
                             body=JSON.parse(body);
                             if(body.URL){
                             console.log("XML REPORT URL PRESENT")
-                            model.data.thyrocareXmlUrl=body.URL; 
+                            model.thyrocareXmlUrl=body.URL; 
+                                console.log(model.thyrocarePdfUrl+"\n"+model.thyrocareXmlUrl);
                             
                             global.emit("parserRequestSetup",model)
                             model.emit("parserRequest",model)

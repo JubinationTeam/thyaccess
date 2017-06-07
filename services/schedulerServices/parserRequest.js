@@ -39,15 +39,22 @@ function parserRequestFactory(model){
 
 function parserRequest(model){
     
-    console.log(model.data.thyrocarePdfUrl+"--")
-    console.log(model.data.thyrocareXmlUrl)
+    console.log(model.thyrocarePdfUrl+"--")
+    console.log(model.thyrocareXmlUrl)
     
     console.log("PARSER REQUEST")
 
     var parserRequestBody={
                         "mod"       : "parser",
-                        "data"      : model.data
+                        "data"      : {
+                                        "mobile":model.data.mobile,
+                                        "thyrocareLeadId":model.data.thyrocareLeadId,
+                                        "pdfUrl":model.thyrocarePdfUrl,
+                                        "xmlUrl":model.thyrocareXmlUrl
+                        }
                     };
+    
+    console.log(parserRequestBody.data)
     
     var parserRequestParams     = {
                             url     : commonAccessUrl,

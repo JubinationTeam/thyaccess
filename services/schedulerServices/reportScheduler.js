@@ -94,10 +94,10 @@ function makePdfRequestfactory(model){
 
 function makePdfRequest(model){
 
-    var thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/pdf/"+model.data.mobile+"/Myreport"
+model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/pdf/"+model.data.mobile+"/Myreport"
         
         var requestParams   = {
-                                url     : thyrocareReportUrl,
+                                url     : model.thyrocareReportUrl,
                                 method  : 'GET',
                                 headers : headers
                 }
@@ -110,10 +110,8 @@ function makePdfRequest(model){
                     if(body.URL)
                         {
                             console.log(body.URL+"uuuuuuuuuurrrrrrlllll")
-                            console.log("REPORT URL PRESENT")
-                            console.log(model.data+"^^^^^^^^^^^^^^^^^")
-                            model.data.thyrocarePdfUrl=body.URL; 
-                            console.log(model.data+"^^^^^^^^^^^^^^^^^")
+                            console.log("REPORT URL PRESENT");
+                            model.thyrocarePdfUrl=body.URL; 
 //                            global.emit("awsApiSetup",model)
 //                            model.emit("awsService",model)
                             
