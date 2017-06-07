@@ -57,63 +57,65 @@ function awsApiCall(model){
                     headers : headers,
                     body    : JSON.stringify(awsParams)
                 }
-    
-        request(awsRequestParams, function (error, response, body){
-            
-                if(body){ 
-                        try{
-                            body=JSON.parse(body);
-                        }
-                        catch(err){
-                            console.log(err)
-                            model.info=err
-                        }
-                        if(body.link){
+//    
+//        request(awsRequestParams, function (error, response, body){
+//            
+//                if(body){ 
+//                        try{
+//                            body=JSON.parse(body);
+//                        }
+//                        catch(err){
+//                            console.log(err)
+//                            model.info=err
+//                        }
+//                        if(body.link){
+//                            
+//                            console.log("LINK PRESENT")
+//                            model.data.s3Link=body.link
+//                            //add model.data
+//                            commonVar.add()
+//                            commonVar.check()
+//                            model.aws=true;
                             
-                            console.log("LINK PRESENT")
-                            model.data.s3Link=body.link
-                            //add model.data
-                            commonVar.add()
-                            commonVar.check()
-                            model.aws=true;
-                            
+                            model.data.s3Link="dkfjhgbsdhjfgdsj"
+        
                             global.emit("readGuardSetup",model)
                             model.emit("readGuard",model)
                             
-                            global.emit("xmlRequestSetup",model)
-                            model.emit("xmlRequestService",model)
+//                            global.emit("xmlRequestSetup",model)
+//                            model.emit("xmlRequestService",model)
                             
 //                            global.emit("updateLocalDatabaseSetup",model)
 //                            model.emit("updateLocalDatabase",model)
                             
-                           }
-                        else{
-                            commonVar.add()
-                            commonVar.check()
-                            console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
-                            model.info="Error while querying.Link from AWS API not present : Thyrocare API \n";
-                        }
-                }
-                else if(response){
-                        commonVar.add()
-                        commonVar.check()
-                        model.info=response;
-                    }
-                else if(error){
-                        //console.log(error);
-                        commonVar.add()
-                        commonVar.check()
-                        model.info=error;
-                    }
-                else{
-                        commonVar.add()
-                        commonVar.check()
-                        console.log("Error while querying AWS API : Thyrocare API \n");
-                        model.info="Error while querying AWS API : Thyrocare API \n";
-                }
-            model.emit(globalCallBackRouter,model)
-        }); 
-    
+//                           }
+//                        else{
+//                            commonVar.add()
+//                            commonVar.check()
+//                            console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
+//                            model.info="Error while querying.Link from AWS API not present : Thyrocare API \n";
+//                        }
+//                }
+//                else if(response){
+//                        commonVar.add()
+//                        commonVar.check()
+//                        model.info=response;
+//                    }
+//                else if(error){
+//                        //console.log(error);
+//                        commonVar.add()
+//                        commonVar.check()
+//                        model.info=error;
+//                    }
+//                else{
+//                        commonVar.add()
+//                        commonVar.check()
+//                        console.log("Error while querying AWS API : Thyrocare API \n");
+//                        model.info="Error while querying AWS API : Thyrocare API \n";
+//                }
+//            model.emit(globalCallBackRouter,model)
+//        }); 
+//    
 }
 
 //completedDocsrts
