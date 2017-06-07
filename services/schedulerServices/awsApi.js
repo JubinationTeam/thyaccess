@@ -87,8 +87,7 @@ function awsApiCall(model){
 //                            global.emit("xmlRequestSetup",model)
 //                            model.emit("xmlRequestService",model)
                             
-//                            global.emit("updateLocalDatabaseSetup",model)
-//                            model.emit("updateLocalDatabase",model)
+
                             
 //                           }
 //                        else{

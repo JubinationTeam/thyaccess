@@ -81,6 +81,8 @@ function updateGuard(model){
                         catch(err){
                             model.info=err
                         }
+                        global.emit("updateLocalDatabaseSetup",model)
+                        model.emit("updateLocalDatabase",model)
                 }
                 else if(response){
                             model.info=response;
