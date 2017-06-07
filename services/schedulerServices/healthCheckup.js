@@ -71,7 +71,13 @@ function createHealthCheckupDoc(model){
     request(requestParams, function (error, response, body){
         
         if(body){
-                body=JSON.parse(body);
+                try{
+                    body=JSON.parse(body);
+                }
+                catch(err){
+                    console.log(err)
+                    model.info=err
+                }
                
         }
         else if(response){
@@ -82,9 +88,10 @@ function createHealthCheckupDoc(model){
                 model.info=error;
         }
         else{
+                console.log("Error while updating lead details : Thyrocare API \n"+body)
                 model.info="Error while updating lead details : Thyrocare API \n"+body;
         }
-    global.emit(globalCallBackRouter,model)
+    model.emit(globalCallBackRouter,model)
 
     }) 
 

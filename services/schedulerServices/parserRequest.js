@@ -38,11 +38,6 @@ function parserRequestFactory(model){
 }
 
 function parserRequest(model){
-    
-    console.log(model.thyrocarePdfUrl+"--")
-    console.log(model.thyrocareXmlUrl)
-    
-    console.log("PARSER REQUEST")
 
     var parserRequestBody={
                         "mod"       : "parser",
@@ -54,8 +49,6 @@ function parserRequest(model){
                         }
                     };
     
-    console.log(parserRequestBody.data)
-    
     var parserRequestParams     = {
                             url     : commonAccessUrl,
                             method  : 'POST',
@@ -64,15 +57,15 @@ function parserRequest(model){
                     }
     
         request(parserRequestParams, function (error, response, body){
-             //       
+
                 if(body){
                             try{
-                                    body=JSON.parse(body);
+                                body=JSON.parse(body);
                             }
                             catch(err){
                                 console.log(err)
+                                model.info=err
                             }
-                            console.log(body)
                             if(!body.error){
                                 console.log("PARSER DETAILS PRESENT")
                                 model.data.testReport=body
@@ -86,17 +79,14 @@ function parserRequest(model){
                     }
                 else if(response){
                             model.info=response;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
-                            //console.log(error);
                             model.info=error;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
-                            model.emit(globalCallBackRouter,model)
                 }
+            model.emit(globalCallBackRouter,model)
     })  
 }
 

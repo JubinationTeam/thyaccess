@@ -66,7 +66,12 @@ function update(model){
     request(updateRequestParams, function (error, response, body){
         
         if(body){
-                body=JSON.parse(body);
+                try{
+                    body=JSON.parse(body);
+                }
+                catch(err){
+                    model.info=err
+                }
                 model.leadData=model.data;
                 global.emit("createAccountSetup",model)
                 model.emit("createAccountService",model)
@@ -76,17 +81,15 @@ function update(model){
         }
         else if(response){
                 model.info=response;
-                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.logg(error);
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while updating lead details : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
         }
+        model.emit(globalCallBackRouter,model)
     }) 
 
 }

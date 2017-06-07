@@ -107,14 +107,13 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
             if(body){
                     
                     try{
-                            body=JSON.parse(body);
-                            }
-                            catch(err){
-                                console.log(err)
-                            }
+                        body=JSON.parse(body);
+                        }
+                    catch(err){
+                            console.log(err)
+                        }
                     if(body.URL)
                         {
-                            console.log(body.URL+"uuuuuuuuuurrrrrrlllll")
                             console.log("REPORT URL PRESENT");
                             model.thyrocarePdfUrl=body.URL; 
 //                            global.emit("awsApiSetup",model)
@@ -128,20 +127,17 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                             console.log("REPORT URL NOT PRESENT")
                             commonVar.add()
                             commonVar.check()
-                            
                     }
                     
            }
             else if(response){
                     model.info=response;
-                    model.emit(globalCallBackRouter,model)
                     commonVar.add()
                     commonVar.check()
                     }
             else if(error){
                     //console.log(error);
                     model.info=error;
-                    model.emit(globalCallBackRouter,model)
                     commonVar.add()
                     commonVar.check()
                 }
@@ -150,6 +146,7 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     commonVar.add()
                     commonVar.check()
             }
+        model.emit(globalCallBackRouter,model)
     })
 }
 

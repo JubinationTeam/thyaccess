@@ -99,23 +99,26 @@ function postOrder(model){
     request(requestParams, function (error, response, body){
         
         if(body){
-                body=JSON.parse(body);
+                try{
+                    body=JSON.parse(body)
+                }
+                catch(err){
+                    model.info=err  
+                }
                 event.on("callgettingResponseDetails",gettingResponseDetails)
                 event.emit("callgettingResponseDetails",model,body)
         }
         else if(response){
                 model.info=response;
-                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.log(error);
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while Posting Order at Thyrocare : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
         }
+    model.emit(globalCallBackRouter,model)
     })        
 }
 

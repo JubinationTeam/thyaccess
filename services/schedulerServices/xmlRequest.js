@@ -53,12 +53,12 @@ function xmlRequest(model){
                             body=JSON.parse(body);
                             }
                             catch(err){
+                                model.info=err
                                 console.log(err)
                             }
                             if(body.URL){
                             console.log("XML REPORT URL PRESENT")
                             model.thyrocareXmlUrl=body.URL; 
-                                console.log(model.thyrocarePdfUrl+"\n"+model.thyrocareXmlUrl);
                             
                             global.emit("parserRequestSetup",model)
                             model.emit("parserRequest",model)
@@ -79,7 +79,7 @@ function xmlRequest(model){
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
                 }
-            global.emit(globalCallBackRouter,model)
+            model.emit(globalCallBackRouter,model)
     })  
 }
 

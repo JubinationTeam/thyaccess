@@ -71,26 +71,28 @@ function setupLeadDetailsFunction(model){
     
         request(leadDetailsRequestParams, function (error, response, body){
                     
-                if(body){        
-                        body=JSON.parse(body);
-                        console.log(body)
+                if(body){
+                        try{
+                            body=JSON.parse(body);
+                        }
+                        catch(err){
+                            model.info=err
+                        }
                         event.on("callgetLeadDocument",getLeadDocument)
                         event.emit("callgetLeadDocument",model,body)
                 }
                 else if(response){
                         model.info=response;
-                        model.emit(globalCallBackRouter,model)
                 }
                 else if(error){
                         //console.log(error);
                         model.info=error;
-                        model.emit(globalCallBackRouter,model)
                 }
                 else{
                     model.info="Error while fetching Lead Details : Thyrocare API \n"+body;
-                    model.emit(globalCallBackRouter,model)
                 }
-            
+
+            model.emit(globalCallBackRouter,model)
         }); 
     }
     

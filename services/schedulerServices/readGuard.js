@@ -70,8 +70,13 @@ function readGuard(model,modelIndex){
     
         request(updateRequestParams, function (error, response, body){
                     
-                if(body){        
-                        body=JSON.parse(body);
+                if(body){       
+                        try{
+                            body=JSON.parse(body);
+                        }
+                        catch(err){
+                            model.info=err
+                        }
                         model.docToUpdateInLead=body.data._id
                         model.newTags=body.data.tags[0]
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
@@ -79,10 +84,17 @@ function readGuard(model,modelIndex){
                         global.emit("updateGuardSetup")
                         model.emit("updateGuard",model)
                 }
+                else if(response){
+                            model.info=response;
+                    }
+                else if(error){
+                            model.info=error;
+                    }
                 else{
+                    model.info="Error while reading guard : Thyrocare API \n"
                     console.log("Error while reading guard : Thyrocare API \n");
                 }
-            
+            model.emit(globalCallBackRouter,model)
         }); 
 }
 

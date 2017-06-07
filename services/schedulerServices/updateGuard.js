@@ -70,9 +70,26 @@ function updateGuard(model,modelIndex){
     
         request(updateRequestParams, function (error, response, body){
                  
-                if(!body){
+              if(body){       
+                        try{
+                            body=JSON.parse(body);
+                            model.info=body
+                        }
+                        catch(err){
+                            model.info=err
+                        }
+                }
+                else if(response){
+                            model.info=response;
+                    }
+                else if(error){
+                            model.info=error;
+                    }
+                else{
+                    model.info="Error while updating guard : Thyrocare API \n"
                     console.log("Error while updating guard : Thyrocare API \n");
                 }
+            model.emit(globalCallBackRouter,model)
             
         }); 
     

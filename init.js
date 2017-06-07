@@ -13,7 +13,7 @@ var updateRepository=require('./services/realTimeServices/updateRepository.js').
 var createAccount=require('./services/realTimeServices/createAccount.js').init;
 
 //scheduler services
-var reportScheduler=require('./services/schedulerServices/reportScheduler.js').init;
+//var reportScheduler=require('./services/schedulerServices/reportScheduler.js').init;
 var updateLocalDatabase=require('./services/schedulerServices/updateLocalDatabase.js').init;
 var awsApi=require('./services/schedulerServices/awsApi.js').init;
 var xmlRequest=require('./services/schedulerServices/xmlRequest.js').init;
@@ -75,7 +75,7 @@ function init(){
     postOrder(globalEmitter,'postOrder',globalDataAccessCall,globalCallBackRouter,thyrocareUrls.postOrder,thyrocareApiKey);
     updateRepository(globalEmitter,'updateRepositorySetup',globalCallBackRouter,globalDataAccessCall,commonAccessUrl,guardKey);
     createAccount(globalEmitter,'createAccountSetup',globalCallBackRouter,commonAccessUrl);
-    reportScheduler(globalEmitter,globalDataAccessCall,globalDataAccessCall,globalCallBackRouter)
+//    reportScheduler(globalEmitter,globalDataAccessCall,globalDataAccessCall,globalCallBackRouter)
     updateLocalDatabase(globalEmitter,'updateLocalDatabaseSetup',globalCallBackRouter,globalDataAccessCall)
     awsApi(globalEmitter,'awsApiSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
     reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)

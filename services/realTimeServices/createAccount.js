@@ -58,22 +58,26 @@ function createAccount(model){
     request(createAccountRequestParams, function (error, response, body){
         
         if(body){
-                body=JSON.parse(body);
+                try{
+                    body=JSON.parse(body);
+                }
+                catch(err){
+                    console.log(err)
+                    model.info=err
+                }
                     
         }
         else if(response){
                 model.info=response;
-                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.logg(error);
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while creating User Account : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
         }
+    model.emit(globalCallBackRouter,model)
     }) 
 
 }
