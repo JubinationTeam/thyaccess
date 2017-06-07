@@ -74,10 +74,10 @@ function parserRequest(model){
                             }
                             console.log(body)
                             if(body.URL){
-                            console.log("PARSER DETAILS ")
+                            console.log("PARSER DETAILS PRESENT")
                             model.data.testReport=body
-//                            global.emit("healthCheckupSetup",model)
-//                            model.emit("healthCheckup",model)
+                            global.emit("healthCheckupSetup",model)
+                            model.emit("healthCheckup",model)
                             }
 //                            else{
 //                                    console.log("PARSER DETAILS NOT PRESENT")
