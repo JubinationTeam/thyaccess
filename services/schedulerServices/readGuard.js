@@ -70,7 +70,7 @@ function readGuard(model,modelIndex){
                     body    : JSON.stringify(readParams)
                 }
     
-        request(updateRequestParams, function (error, response, body){
+        request(readRequestParams, function (error, response, body){
                     
                 if(body){       
                         try{
@@ -83,6 +83,7 @@ function readGuard(model,modelIndex){
                         model.newTags=body.data.tags[0]
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
+                        console.log(body.data)
 //                        global.emit("updateGuardSetup")
 //                        model.emit("updateGuard",model)
                 }
