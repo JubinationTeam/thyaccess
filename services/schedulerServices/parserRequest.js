@@ -39,6 +39,8 @@ function parserRequestFactory(model){
 
 function parserRequest(model){
     
+    console.log(model.data+"+++++++++++++++++")
+    
     console.log("PARSER REQUEST")
 
     var parserRequestBody={
