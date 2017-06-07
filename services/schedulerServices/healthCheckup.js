@@ -68,7 +68,6 @@ function createHealthCheckupDoc(model){
                             body    : JSON.stringify(commonAccessDetails)
                     }
     
-    
     request(requestParams, function (error, response, body){
         
         if(body){
