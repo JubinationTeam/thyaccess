@@ -67,22 +67,22 @@ function parserRequest(model){
              //       
                 if(body){
                             try{
-                            body=JSON.parse(body);
+                                    body=JSON.parse(body);
                             }
                             catch(err){
                                 console.log(err)
                             }
                             console.log(body)
-                            if(body.URL){
-                            console.log("PARSER DETAILS PRESENT")
-                            model.data.testReport=body
-                            global.emit("healthCheckupSetup",model)
-                            model.emit("healthCheckup",model)
+                            if(!body.error){
+                                console.log("PARSER DETAILS PRESENT")
+                                model.data.testReport=body
+                                global.emit("healthCheckupSetup",model)
+                                model.emit("healthCheckup",model)
                             }
-//                            else{
-//                                    console.log("PARSER DETAILS NOT PRESENT")
-//                                 
-//                            }
+                            else{
+                                    console.log("PARSER DETAILS NOT PRESENT")
+                                 
+                            }
                     }
                 else if(response){
                             model.info=response;
