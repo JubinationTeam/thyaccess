@@ -73,13 +73,13 @@ function readGuard(model,modelIndex){
         request(readRequestParams, function (error, response, body){
                     
                 if(body){       
-                        try{
+//                        try{
                             body=JSON.parse(body);
-                        }
-                        catch(err){
+//                        }
+//                        catch(err){
                             model.info=err
-                        }
-                        console.log(body[0]+"--------")
+//                        }
+                        console.log(body+"--------")
                         model.docToUpdateInLead=body.data._id
                         model.newTags=body.data.tags[0]
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
