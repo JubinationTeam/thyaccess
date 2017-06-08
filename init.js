@@ -39,7 +39,7 @@ var validRequestEntities={
                             "post":["thyrocareBook/","freshlead/"],
                             "get":["GetReport/","GetProducts/"]
                          };
-   
+     
 const globalDataAccessCall='dataAccessCall';
 const globalCallBackRouter='callbackRouter';
 
