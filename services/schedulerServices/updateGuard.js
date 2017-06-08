@@ -48,8 +48,6 @@ function updateGuardFactory(model){
 
 function updateGuard(model){
     
-      
-    console.log("IM IN UPDATE GUARD")
         
         var updateParams={
                             "mod"       : "guard",
@@ -74,6 +72,8 @@ function updateGuard(model){
         request(updateRequestParams, function (error, response, body){
                  
               if(body){       
+                  
+                        console.log("IM IN UPDATE GUARD::::::::")
                         try{
                             body=JSON.parse(body);
                             model.info=body
