@@ -54,7 +54,7 @@ function userAccount(model){
                     }
     request(userAccountRequestParams, function (error, response, body){
             
-        if(body){
+        if(body){    
                 try{
                     body=JSON.parse(body);
                 }
