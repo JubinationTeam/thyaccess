@@ -39,7 +39,7 @@ function userAccountFactory(model){
 }
 
 function userAccount(model){
-    console.log("IM IN USER ACCOUNT")
+    console.log("IM IN USER ACCOUNT:::::::")
     
     var userAccountSetup={
                         "mod"       : "userAccount",
