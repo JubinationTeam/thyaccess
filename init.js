@@ -70,7 +70,7 @@ const thyrocareApiKey="JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwot
 
 //instantiating Handler,Service layer and Data Access layer
 function init(){
-               
+                  
     controllerInit(routerInitModel);
     getLeadDetails(globalEmitter,'thyrocareBook',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey);
     postOrder(globalEmitter,'postOrder',globalDataAccessCall,globalCallBackRouter,thyrocareUrls.postOrder,thyrocareApiKey);
