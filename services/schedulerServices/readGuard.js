@@ -46,6 +46,7 @@ function readGuardFactory(model){
 
 function readGuard(model,modelIndex){
   
+    console.log("IM IN READ")
     
         var data={
                     "key"   : guardKey,
