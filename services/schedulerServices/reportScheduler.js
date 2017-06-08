@@ -56,7 +56,7 @@ function init(globalEmitter,globalDACall,callback){
 function postDataAccessCallback(modelPreLoop){
     
         commonVar.setTotalDocs(modelPreLoop.status.length)
-        console.log("Total Documents:"+commonVar.totalDocs)
+        console.log("Total Documents::::"+commonVar.totalDocs)
     
         modelPreLoop.status.forEach(function(){});
 
