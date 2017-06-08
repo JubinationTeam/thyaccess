@@ -31,31 +31,26 @@ function init(globalEmitter,globalCall,callback,url){
 
 function setup(model)
 {
-    model.once("createAccountService",createAccountFactory);
+    model.once("userAccountService",userAccountFactory);
 }
 
-function createAccountFactory(model){
-    new createAccount(model)
+function userAccountFactory(model){
+    new userAccount(model)
 }
 
-function createAccount(model){
-    var createAccountSetup={
+function userAccount(model){
+    var userAccountSetup={
                         "mod"       : "userAccount",
-                        "data"      : {	
-                                        
-                                        "operation" : "createAccount",        
-                                        "data":model.data    
-                                        
-                                    } 
+                        "data"      : model.data
                     };
     
-    var createAccountRequestParams     = {
+    var userAccountRequestParams     = {
                             url     : commonAccessUrl,
                             method  : 'POST',
                             headers : headers,
-                            body    : JSON.stringify(createAccountSetup)
+                            body    : JSON.stringify(userAccountSetup)
                     }
-    request(createAccountRequestParams, function (error, response, body){
+    request(userAccountRequestParams, function (error, response, body){
         
         if(body){
                 try{
@@ -69,15 +64,17 @@ function createAccount(model){
         }
         else if(response){
                 model.info=response;
+                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.logg(error);
                 model.info=error;
+                model.emit(globalCallBackRouter,model)
         }
         else{
-                model.info="Error while creating User Account : Thyrocare API \n"+body;
+                model.info="Error while accessing User Account Service : Thyrocare API \n"+body;
+                model.emit(globalCallBackRouter,model)
         }
-    model.emit(globalCallBackRouter,model)
     }) 
 
 }

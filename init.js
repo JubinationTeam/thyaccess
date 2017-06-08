@@ -10,7 +10,6 @@ var controllerInit=require('jubi-express-controller').init;
 var postOrder=require('./services/realTimeServices/postOrder.js').init;
 var getLeadDetails=require('./services/realTimeServices/getLeadDetails.js').init;
 var updateRepository=require('./services/realTimeServices/updateRepository.js').init;
-var createAccount=require('./services/realTimeServices/createAccount.js').init;
 
 //scheduler services
 var reportScheduler=require('./services/schedulerServices/reportScheduler.js').init;
@@ -19,6 +18,7 @@ var awsApi=require('./services/schedulerServices/awsApi.js').init;
 var xmlRequest=require('./services/schedulerServices/xmlRequest.js').init;
 var parserRequest=require('./services/schedulerServices/parserRequest.js').init;
 var healthCheckup=require('./services/schedulerServices/healthCheckup.js').init;
+var userAccount=require('./services/schedulerServices/userAccount.js').init;
 
 //scheduler sub-services
 var readGuard=require('./services/schedulerServices/readGuard.js').init;
@@ -70,11 +70,12 @@ const thyrocareApiKey="JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwot
 
 //instantiating Handler,Service layer and Data Access layer
 function init(){
+    
     controllerInit(routerInitModel);
     getLeadDetails(globalEmitter,'thyrocareBook',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey);
     postOrder(globalEmitter,'postOrder',globalDataAccessCall,globalCallBackRouter,thyrocareUrls.postOrder,thyrocareApiKey);
     updateRepository(globalEmitter,'updateRepositorySetup',globalCallBackRouter,globalDataAccessCall,commonAccessUrl,guardKey);
-    createAccount(globalEmitter,'createAccountSetup',globalCallBackRouter,commonAccessUrl);
+    userAccount(globalEmitter,'userAccountSetup',globalCallBackRouter,commonAccessUrl);
     updateLocalDatabase(globalEmitter,'updateLocalDatabaseSetup',globalCallBackRouter,globalDataAccessCall)
     awsApi(globalEmitter,'awsApiSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
     reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)

@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 //node dependencies
 var request = require('request');
@@ -81,21 +81,22 @@ function updateGuard(model){
                         catch(err){
                             model.info=err
                         }
-                        global.emit("updateLocalDatabaseSetup",model)
-                        model.emit("updateLocalDatabase",model)
+                        global.emit("userAccountSetup",model)
+                        model.emit("userAccountService",model)
                 }
                 else if(response){
                             model.info=response;
+                            model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
                             model.info=error;
+                            model.emit(globalCallBackRouter,model)
                     }
                 else{
                     model.info="Error while updating guard : Thyrocare API \n"
                     console.log("Error while updating guard : Thyrocare API \n");
+                    model.emit(globalCallBackRouter,model)
                 }
-            model.emit(globalCallBackRouter,model)
-            
         }); 
     
 }

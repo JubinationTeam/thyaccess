@@ -78,26 +78,33 @@ function readGuard(model,modelIndex){
                         catch(err){
                             model.info=err
                         }
-                        console.log(body.data[0]._id+"--------")
+                    
                         model.docToUpdateInLead=body.data[0]._id
+                        
                         model.newTags=body.data[0].tags[0]
+                    
+                        //new updated
+//                          model.newTags.leadId=model.data.leadId
+                    
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true
-                        console.log(model.newTags)
                         global.emit("updateGuardSetUp",model)
                         model.emit("updateGuard",model)
                 }
                 else if(response){
                             model.info=response;
+                            model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
                             model.info=error;
+                            model.emit(globalCallBackRouter,model)
                     }
                 else{
                     model.info="Error while reading guard : Thyrocare API \n"
                     console.log("Error while reading guard : Thyrocare API \n");
+                    model.emit(globalCallBackRouter,model)
                 }
-            model.emit(globalCallBackRouter,model)
+            
         }); 
 }
 

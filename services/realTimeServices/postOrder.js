@@ -110,15 +110,17 @@ function postOrder(model){
         }
         else if(response){
                 model.info=response;
+                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.log(error);
                 model.info=error;
+                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while Posting Order at Thyrocare : Thyrocare API \n"+body;
+                model.emit(globalCallBackRouter,model)
         }
-    model.emit(globalCallBackRouter,model)
     })        
 }
 
@@ -126,6 +128,7 @@ function gettingResponseDetails(model,body){
     
     model.thyroDoc=body
     console.log(model.thyroDoc)
+    
     if(model.thyroDoc.ADDRESS&&model.thyroDoc.BOOKED_BY&&model.thyroDoc.EMAIL&&model.thyroDoc.MOBILE){
             model.data.tags[0].status=model.thyroDoc.STATUS          
             model.data.tags[0].thyrocareLeadDetails={};

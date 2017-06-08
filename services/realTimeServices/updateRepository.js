@@ -81,15 +81,18 @@ function update(model){
         }
         else if(response){
                 model.info=response;
+                model.emit(globalCallBackRouter,model)
         }
         else if(error){
                 //console.logg(error);
                 model.info=error;
+                model.emit(globalCallBackRouter,model)
         }
         else{
                 model.info="Error while updating lead details : Thyrocare API \n"+body;
+                model.emit(globalCallBackRouter,model)
         }
-        model.emit(globalCallBackRouter,model)
+        
     }) 
 
 }

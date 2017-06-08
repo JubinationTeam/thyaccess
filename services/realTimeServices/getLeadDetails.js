@@ -83,16 +83,19 @@ function setupLeadDetailsFunction(model){
                 }
                 else if(response){
                         model.info=response;
+                        model.emit(globalCallBackRouter,model)
                 }
                 else if(error){
                         //console.log(error);
                         model.info=error;
+                        model.emit(globalCallBackRouter,model)
                 }
                 else{
                     model.info="Error while fetching Lead Details : Thyrocare API \n"+body;
+                    model.emit(globalCallBackRouter,model)
                 }
 
-            model.emit(globalCallBackRouter,model)
+            
         }); 
     }
     

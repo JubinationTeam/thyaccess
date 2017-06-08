@@ -134,19 +134,21 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     model.info=response;
                     commonVar.add()
                     commonVar.check()
+                    model.emit(globalCallBackRouter,model)
                     }
             else if(error){
                     //console.log(error);
                     model.info=error;
                     commonVar.add()
                     commonVar.check()
+                    model.emit(globalCallBackRouter,model)
                 }
             else{
                     console.log("Error while scheduling report : Thyrocare API ");
                     commonVar.add()
                     commonVar.check()
+                    model.emit(globalCallBackRouter,model)
             }
-        model.emit(globalCallBackRouter,model)
     })
 }
 
