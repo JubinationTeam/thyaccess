@@ -41,8 +41,8 @@ function setup(model)
 
 function updateFactory(model){
     new update(model)
-}
-                        
+}  
+                          
 function update(model){  
     var updateProperty={
                         "mod"       : "guard",
