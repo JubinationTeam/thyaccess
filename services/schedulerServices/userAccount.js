@@ -36,7 +36,7 @@ function setup(model)
 
 function userAccountFactory(model){
     new userAccount(model)
-}    
+}      
         
 function userAccount(model){
     console.log("IM IN USER ACCOUNT:::::::")
