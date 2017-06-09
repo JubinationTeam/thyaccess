@@ -64,7 +64,7 @@ function userAccount(model){
                     console.log("ERR IN Thyrocare APi User acc")
                 }
                                        
-        }     
+        }         
         else if(response){
                 model.info=response;
                 model.emit(globalCallBackRouter,model)
