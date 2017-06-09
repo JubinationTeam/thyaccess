@@ -63,7 +63,7 @@ function userAccount(model){
                     model.info=err
                     console.log("ERR IN Thyrocare APi User acc")
                 }
-                        
+                          
         }
         else if(response){
                 model.info=response;
