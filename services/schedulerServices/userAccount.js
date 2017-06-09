@@ -13,7 +13,7 @@ var global;
 
 //Guard Access Variables
 var commonAccessUrl;
-var guardKey;     
+var guardKey;       
 
 //global variables
 var headers     = {
