@@ -141,8 +141,9 @@ function gettingResponseDetails(model,body){
                     
                 }
             }
-            //global.emit("updateRepositorySetup",model)
-            //model.emit("updateRepository",model)
+            model.data.tags[0].vendorId="thyrocare";    
+            global.emit("updateRepositorySetup",model)
+            model.emit("updateRepository",model)
     }
     else{
         model.info="Thyrocare post order query failed, Response : "+model.thyroDoc.RESPONSE

@@ -43,7 +43,7 @@ function userAccount(model){
     
     var userAccountSetup={
                         "mod"       : "userAccount",
-                        "data"      : model
+                        "data"      : model.info
                     };
     
     var userAccountRequestParams     = {  
