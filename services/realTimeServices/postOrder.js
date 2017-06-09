@@ -123,7 +123,7 @@ function postOrder(model){
         }
     })        
 }
-
+  
 function gettingResponseDetails(model,body){
     
     model.thyroDoc=body
