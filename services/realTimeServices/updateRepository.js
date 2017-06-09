@@ -55,7 +55,7 @@ function update(model){
                                                         "tags"  : model.data.tags     
                                                  }
                                     } 
-                    };
+                    };  
     
     var updateRequestParams     = {
                             url     : commonAccessUrl,
