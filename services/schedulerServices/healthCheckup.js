@@ -81,7 +81,7 @@ function createHealthCheckupDoc(model){
                 }
                     console.log("HealthChechup Document created successfully")
                    
-        }
+        }      
         else if(response){
                 model.info=response;
                 model.emit(globalCallBackRouter,model)
