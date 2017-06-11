@@ -80,7 +80,7 @@ function createHealthCheckupDoc(model){
                     model.emit(globalCallBackRouter,model)
                 }
                     console.log("HealthChechup Document created successfully")
-               
+                   
         }
         else if(response){
                 model.info=response;
