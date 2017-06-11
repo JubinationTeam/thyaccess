@@ -58,8 +58,7 @@ function userAccount(model){
                                                                                        
         if(body){      
                 try{
-                    console.log(body)
-                    //body=JSON.parse(body);
+                    body=JSON.parse(body);
                 }
                 catch(err){
                     console.log(body)                  
@@ -68,8 +67,10 @@ function userAccount(model){
                     console.log("ERR IN Thyrocare APi User acc")
                     model.emit(globalCallBackRouter,model)
                 }
+                if(!err){
                 global.emit("updateLocalDatabaseSetup",model)
                 model.emit("updateLocalDatabase",model)
+                }
                                        
         }                   
         else if(response){

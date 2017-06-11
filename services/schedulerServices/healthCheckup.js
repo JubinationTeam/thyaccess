@@ -79,6 +79,9 @@ function createHealthCheckupDoc(model){
                     model.info=err
                     model.emit(globalCallBackRouter,model)
                 }
+                if(!err){
+                    console.log("HealthChechup Document created successfully")
+                }
                
         }
         else if(response){
