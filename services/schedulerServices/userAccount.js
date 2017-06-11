@@ -61,7 +61,7 @@ function userAccount(model){
                     body=JSON.parse(body);
                 }
                 catch(err){
-                    console.log(body)               
+                    console.log(body)                  
                     console.log(err)      
                     model.info=err
                     console.log("ERR IN Thyrocare APi User acc")
