@@ -67,10 +67,8 @@ function userAccount(model){
                     console.log("ERR IN Thyrocare APi User acc")
                     model.emit(globalCallBackRouter,model)
                 }
-                if(!err){
                 global.emit("updateLocalDatabaseSetup",model)
                 model.emit("updateLocalDatabase",model)
-                }
                                        
         }                   
         else if(response){
