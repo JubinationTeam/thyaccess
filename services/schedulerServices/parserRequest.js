@@ -80,7 +80,7 @@ function parserRequest(model){
                                 model.info="PARSER DETAILS NOT PRESENT"
                                 model.emit(globalCallBackRouter,model)
                             }
-                    }
+                    }     
                 else if(response){
                             model.info=response;
                             model.emit(globalCallBackRouter,model)
