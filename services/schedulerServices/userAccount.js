@@ -58,7 +58,8 @@ function userAccount(model){
                                                                                        
         if(body){      
                 try{
-                    body=JSON.parse(body);
+                    console.log(body)
+                    //body=JSON.parse(body);
                 }
                 catch(err){
                     console.log(body)                  
