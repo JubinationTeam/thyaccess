@@ -71,7 +71,7 @@ function parserRequest(model){
                             if(!body.error){
                                 console.log("PARSER DETAILS PRESENT")
                                 model.data.testReport=body
-                                console.log(body+"BODDYYYYYYYYY")
+                                console.log(body+"BODDYYYYYYYYY")      
                                 global.emit("healthCheckupSetup",model)
                                 model.emit("healthCheckup",model)
                             }
