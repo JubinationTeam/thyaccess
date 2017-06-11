@@ -5,7 +5,6 @@ var request = require('request');
 var eventEmitter = require('events');
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
@@ -29,15 +28,18 @@ function init(globalEmitter,globalCall,callback,url){
     globalCallBackRouter=callback;
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("userAccountService",userAccountFactory);
 }
 
+//function to create new 'userAccount' function for each model
 function userAccountFactory(model){
     new userAccount(model)
 }           
-        
+
+//function to call the 'User Account' Api
 function userAccount(model){
     console.log("IM IN USER ACCOUNT:::::::")
     
@@ -62,7 +64,10 @@ function userAccount(model){
                     console.log(err)      
                     model.info=err
                     console.log("ERR IN Thyrocare APi User acc")
+                    model.emit(globalCallBackRouter,model)
                 }
+                global.emit("updateLocalDatabaseSetup",model)
+                model.emit("updateLocalDatabase",model)
                                        
         }                   
         else if(response){
@@ -70,7 +75,6 @@ function userAccount(model){
                 model.emit(globalCallBackRouter,model)
         }
         else if(error){
-                //console.logg(error);
                 model.info=error;
                 model.emit(globalCallBackRouter,model)
         }

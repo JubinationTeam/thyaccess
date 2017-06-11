@@ -7,7 +7,6 @@ var request = require('request');
 var commonVar=require('./helper/staticVariables.js')
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
@@ -20,24 +19,25 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback){
-    globalEmitter.on(globalCall,xmlRequestSetup)
+function init(globalEmitter,globalCall,callback){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
+    globalEmitter.on(globalCall,xmlRequestSetup)
     globalCallBackRouter=callback;
 }
 
+//function to setup model's event listener
 function xmlRequestSetup(model)
 {
     model.once("xmlRequestService",xmlRequestFactory);
 }
 
+//function to create new 'xmlRequest' function for each model
 function xmlRequestFactory(model){
     new xmlRequest(model);
 }
 
+//function to make an XML Report link request to Thyrocare Api
 function xmlRequest(model){
-    
       model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
         
         var xmlRequestParams   = {
@@ -57,16 +57,17 @@ function xmlRequest(model){
                                 console.log(err)
                             }
                             if(body.URL){
-                            console.log("XML REPORT URL PRESENT")
-                            model.thyrocareXmlUrl=body.URL; 
-                            
-                            global.emit("parserRequestSetup",model)
-                            model.emit("parserRequest",model)
-      
-                        }
-                            else{
-                                    console.log("XML REPORT URL NOT PRESENT")
+                                console.log("XML REPORT URL PRESENT")
+                                model.thyrocareXmlUrl=body.URL; 
 
+                                global.emit("parserRequestSetup",model)
+                                model.emit("parserRequest",model)
+      
+                            }
+                            else{
+                                console.log("XML REPORT URL NOT PRESENT")
+                                model.info="XML REPORT URL NOT PRESENT"
+                                model.emit(globalCallBackRouter,model)
                             }
                     }
                 else if(response){
@@ -74,7 +75,6 @@ function xmlRequest(model){
                             model.emit(globalCallBackRouter,model)
                     }
                 else if(error){
-                            //console.log(error);
                             model.info=error;
                             model.emit(globalCallBackRouter,model)
                     }

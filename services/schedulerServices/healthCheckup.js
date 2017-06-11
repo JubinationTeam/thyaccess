@@ -4,7 +4,6 @@
 var request = require('request');
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
@@ -21,24 +20,26 @@ var headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,globalDACall,url,key){
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,callback,url,key){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
-    guardKey=key;
-    commonAccessUrl=url;
+    globalEmitter.on(globalCall,setup)
     globalCallBackRouter=callback;
+    commonAccessUrl=url;
+    guardKey=key;
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("healthCheckup",createHealthCheckupDocFactory);
 }
 
+//function to create new 'createHealthCheckupDoc' function for each model
 function createHealthCheckupDocFactory(model){
     new createHealthCheckupDoc(model)
 }         
-      
+
+//function to create a new document in the Guard module's 'HealthCheckup' schema
 function createHealthCheckupDoc(model){
      
     var commonAccessDetails={
@@ -49,7 +50,7 @@ function createHealthCheckupDoc(model){
                                         "schema": "HealthCheckup",
                                         "data"  : {
                                                     "mobile": model.data.mobile,
-                                                    "healthCheckupId": model.data.leadId,
+                                                    "healthCheckupId": model.data.thyrocareLeadId,
                                                     reportViewed: 0,
                                                     reportDownloaded: 0,
                                                     vendorId: "thyrocare",
@@ -75,8 +76,8 @@ function createHealthCheckupDoc(model){
                     body=JSON.parse(body);
                 }
                 catch(err){
-                    console.log(err)
                     model.info=err
+                    model.emit(globalCallBackRouter,model)
                 }
                
         }
@@ -85,7 +86,6 @@ function createHealthCheckupDoc(model){
                 model.emit(globalCallBackRouter,model)
         }
         else if(error){
-                //console.logg(error);
                 model.info=error;
                 model.emit(globalCallBackRouter,model)
         }
@@ -95,7 +95,6 @@ function createHealthCheckupDoc(model){
                 model.emit(globalCallBackRouter,model)
         }
     
-
     }) 
 
 }

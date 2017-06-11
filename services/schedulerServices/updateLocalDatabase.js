@@ -19,10 +19,12 @@ function init(globalEmitter,globalCall,callback,globalDACall){
     globalCallBackRouter=callback;
 }
 
+//function to setup model's event listener
 function setup(model){
     model.once("updateLocalDatabase",updateLocalDatabase);
 }
 
+//function to update the local database's 'ThyrocareLead' schema
 function updateLocalDatabase(model){
     model.schema=thyrocareLead
     model.dbOpsType="update"
@@ -32,6 +34,7 @@ function updateLocalDatabase(model){
     model.emit(model.dbOpsType,model)
 }
 
+//function to call the router
 function callHandler(model){
     model.info=model.status;
     model.emit(globalCallBackRouter,model)

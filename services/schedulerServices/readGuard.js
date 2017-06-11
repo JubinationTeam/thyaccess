@@ -2,14 +2,8 @@
 
 //node dependencies
 var request = require('request');
-var eventEmitter = require('events');
-
-//function specific event instance
-class eventClass extends eventEmitter{}
-const event = new eventClass()
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 //Guard Access Variables
@@ -26,24 +20,26 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback,url,key){
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,callback,url,key){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
+    globalEmitter.on(globalCall,setup)
     globalCallBackRouter=callback;
     commonAccessUrl=url;
     guardKey=key;
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("readGuard",readGuardFactory);
 }
 
+//function to create new 'readGuard' function for each model
 function readGuardFactory(model){
     new readGuard(model);
 }
 
+//function to read the Guard module's 'Lead' schema
 function readGuard(model,modelIndex){
   
     console.log("IM IN READ")
@@ -78,14 +74,12 @@ function readGuard(model,modelIndex){
                         }
                         catch(err){
                             model.info=err
+                            model.emit(globalCallBackRouter,model)
                         }
                     
                         model.docToUpdateInLead=body.data[0]._id
                         
                         model.newTags=body.data[0].tags[0]
-                    
-                        //new updated
-//                          model.newTags.leadId=model.data.leadId
                     
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].s3Link=model.data.s3Link
                         model.newTags.thyrocareLeadDetails[model.data.thyrocareLeadId].reportStatus=true

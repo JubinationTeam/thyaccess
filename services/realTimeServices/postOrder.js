@@ -9,12 +9,10 @@ class eventClass extends eventEmitter{}
 const event = new eventClass()
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
 var global;
-
 
 //thyrocare call details
 var thyrocareUrl;
@@ -27,20 +25,21 @@ var headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback,url,key){
+function init(globalEmitter,globalCall,callback,url,key){
     globalEmitter.on(globalCall,setup)
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
     globalCallBackRouter=callback;
-    thyrocareKey=key;
     thyrocareUrl=url;
+    thyrocareKey=key;
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("postOrderService",packageCreator);
 }
 
+//function to package the model in the required Thyrocare format to make a Post Order request
 function packageCreator(model){
     
                 var beneficiaryxml="<NewDataSet>"
@@ -83,10 +82,12 @@ function packageCreator(model){
            new postOrderFactory(model);
         }
 
+//function to create a new 'postOrder' function for each model
 function postOrderFactory(model){
     new postOrder(model)
 }
  
+//function to place an order at Thyrocare
 function postOrder(model){
     
     var requestParams     = {
@@ -103,7 +104,8 @@ function postOrder(model){
                     body=JSON.parse(body)
                 }
                 catch(err){
-                    model.info=err  
+                    model.info=err
+                    model.emit(globalCallBackRouter,model)
                 }
                 event.on("callgettingResponseDetails",gettingResponseDetails)
                 event.emit("callgettingResponseDetails",model,body)
@@ -113,7 +115,6 @@ function postOrder(model){
                 model.emit(globalCallBackRouter,model)
         }
         else if(error){
-                //console.log(error);
                 model.info=error;
                 model.emit(globalCallBackRouter,model)
         }
@@ -123,7 +124,8 @@ function postOrder(model){
         }
     })        
 }
-  
+
+//function to get the required Thyrocare response details which will be updated in the Guard module's Lead' schema
 function gettingResponseDetails(model,body){
     
     model.thyroDoc=body
@@ -147,7 +149,6 @@ function gettingResponseDetails(model,body){
     }
     else{
         model.info="Thyrocare post order query failed, Response : "+model.thyroDoc.RESPONSE
-        //console.log(model.info)
         model.emit(globalCallBackRouter,model)
     }
     

@@ -2,7 +2,6 @@
 
 //node dependencies
 var request = require('request');
-var eventEmitter = require('events');
 
 //schema instance
 var ThyrocareLead=require('./../../models/schemas/thyrocareLead.js')
@@ -26,23 +25,26 @@ var headers     = {
 
 // function to instantiate
 function init(globalEmitter,globalCall,callback,globalDACall,url,key){
-    globalEmitter.on(globalCall,setup)
     global=globalEmitter;
+    globalEmitter.on(globalCall,setup)
     globalDataAccessCall=globalDACall;
-    guardKey=key;
-    commonAccessUrl=url;
     globalCallBackRouter=callback;
+    commonAccessUrl=url;
+    guardKey=key;
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("updateRepository",updateFactory);
 }
 
+//function to create a new 'update' function for each model
 function updateFactory(model){
     new update(model)
-}     
-                                                                           
+}    
+
+//function to update the 'Lead' schema in the 'Guard' module                                                                           
 function update(model){  
     var updateProperty={
                         "mod"       : "guard",
@@ -71,12 +73,13 @@ function update(model){
                 }
                 catch(err){
                     model.info=err
+                    model.emit(globalCallBackRouter,model)
                 }
                 model.leadData=model.data;
                 global.emit("createAccountSetup",model)
                 model.emit("createAccountService",model)
                 model.beneficiaryIndex=0
-                saveReportDetails(model);
+                saveReportDetailsLocally(model);
                     
         }
         else if(response){
@@ -84,7 +87,6 @@ function update(model){
                 model.emit(globalCallBackRouter,model)
         }
         else if(error){
-                //console.logg(error);
                 model.info=error;
                 model.emit(globalCallBackRouter,model)
         }
@@ -97,8 +99,8 @@ function update(model){
 
 }
 
-
-function saveReportDetails(model){
+//function to save the lead beneficiary details in the local database
+function saveReportDetailsLocally(model){
     
     if(model.beneficiaryIndex==0){
         var apptDate=model.data.tags[0].apptDate
@@ -120,7 +122,7 @@ function saveReportDetails(model){
         model.dbOpsType="create"
         model.beneficiaryIndex++;
         model.callBackFromDataAccess="callBackLeadGeneration"+model.beneficiaryIndex;
-        model.on(model.callBackFromDataAccess,saveReportDetails)
+        model.on(model.callBackFromDataAccess,saveReportDetailsLocally)
         global.emit(globalDataAccessCall,model)
         model.emit(model.dbOpsType,model)   
     }
@@ -130,12 +132,11 @@ function saveReportDetails(model){
     }
 }
 
+//function the call the router
 function callHandler(model){
     model.info=model.status;
     model.emit(globalCallBackRouter,model)
 }
-
-
 
 //exports
 module.exports.init=init;

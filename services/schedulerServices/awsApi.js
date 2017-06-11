@@ -7,7 +7,6 @@ var request = require('request');
 var commonVar=require('./helper/staticVariables.js')
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
@@ -23,23 +22,25 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback,url){
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,callback,url){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
+    globalEmitter.on(globalCall,setup)
     globalCallBackRouter=callback;
     commonAccessUrl=url
 }
 
+//function to setup model's event listener
 function setup(model)
 {
     model.once("awsService",setupAwsFactory);
 }
 
+//function to create new 'awsApiCall' function for each model
 function setupAwsFactory(model){
     new awsApiCall(model);
 }
 
+//function to call the AWS Api 
 function awsApiCall(model){
     
     console.log("IM IN AWSAPI")
@@ -59,67 +60,64 @@ function awsApiCall(model){
                     headers : headers,
                     body    : JSON.stringify(awsParams)
                 }
-//    
-//        request(awsRequestParams, function (error, response, body){
-//            
-//                if(body){ 
-//                        try{
-//                            body=JSON.parse(body);
-//                        }
-//                        catch(err){
-//                            console.log(err)
-//                            model.info=err
-//                        }
-//                        if(body.link){
-//                            
-//                            console.log("LINK PRESENT")
-//                            model.data.s3Link=body.link
-//                            //add model.data
-//                            commonVar.add()
-//                            commonVar.check()
-//                            model.aws=true;
+    
+        request(awsRequestParams, function (error, response, body){
+            
+                if(body){ 
+                        try{
+                            body=JSON.parse(body);
+                        }
+                        catch(err){
+                            model.info=err
+                            model.emit(globalCallBackRouter,model)
+                        }
+                        if(body.link){
                             
-                            model.data.s3Link="dkfjhgbsdhjfgdsj"
+                            console.log("LINK PRESENT")
+                            model.data.s3Link=body.link
+                            console.log(body.link)
+                           
+                            commonVar.add()
+                            commonVar.check()
+                            model.aws=true;
         
-                            global.emit("readGuardSetUp",model)
-                            model.emit("readGuard",model)
-                            
+//                            global.emit("readGuardSetUp",model)
+//                            model.emit("readGuard",model)
+//                            
 //                            global.emit("xmlRequestSetup",model)
 //                            model.emit("xmlRequestService",model)
                             
-
-                            
-//                           }
-//                        else{
-//                            commonVar.add()
-//                            commonVar.check()
-//                            console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
-//                            model.info="Error while querying.Link from AWS API not present : Thyrocare API \n";
-//                        }
-//                }
-//                else if(response){
-//                        commonVar.add()
-//                        commonVar.check()
-//                        model.info=response;
-//                        model.emit(globalCallBackRouter,model)
-//                    }
-//                else if(error){
-//                        //console.log(error);
-//                        commonVar.add()
-//                        commonVar.check()
-//                        model.info=error;
-//                        model.emit(globalCallBackRouter,model)
-//                    }
-//                else{
-//                        commonVar.add()
-//                        commonVar.check()
-//                        console.log("Error while querying AWS API : Thyrocare API \n");
-//                        model.info="Error while querying AWS API : Thyrocare API \n";
-//                        model.emit(globalCallBackRouter,model)
-//                }
-//        }); 
-//    
+                           }
+                        else{
+                            commonVar.add()
+                            commonVar.check()
+                            console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
+                            model.info="Error while querying.Link from AWS API not present : Thyrocare API \n";
+                            model.emit(globalCallBackRouter,model)
+                        }
+                }
+                else if(response){
+                        commonVar.add()
+                        commonVar.check()
+                        model.info=response;
+                        model.emit(globalCallBackRouter,model)
+                    }
+                else if(error){
+                        commonVar.add()
+                        commonVar.check()
+                        model.info=error;
+                        model.emit(globalCallBackRouter,model)
+                    }
+                else{
+                        commonVar.add()
+                        commonVar.check()
+                        console.log("Error while querying AWS API : Thyrocare API \n");
+                        model.info="Error while querying AWS API : Thyrocare API \n";
+                        model.emit(globalCallBackRouter,model)
+                }
+        }); 
+    
 }
 
-//completedDocsrts
+//exports
 module.exports.init=init;

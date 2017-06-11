@@ -2,14 +2,8 @@
 
 //node dependencies
 var request = require('request');
-var eventEmitter = require('events');
-
-//function specific event instance
-class eventClass extends eventEmitter{}
-const event = new eventClass()
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 //Guard Access Variables
@@ -26,28 +20,27 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback,url,key){
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,callback,url,key){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
+    globalEmitter.on(globalCall,setup)
     globalCallBackRouter=callback;
     commonAccessUrl=url;
     guardKey=key;
 }
 
-//    model.data.tags[0].vendorId="thyrocare";
-//    model.data.tags[0].leadId=model.data.leadId;
+//function to setup model's event listener
 function setup(model)
 {
     model.once("updateGuard",updateGuardFactory);
 }
 
+//function to create new 'updateGuard' function for each model
 function updateGuardFactory(model){
     new updateGuard(model);
 }
 
+//function to update the Guard module's 'Lead' schema
 function updateGuard(model){
-    
         
         var updateParams={
                             "mod"       : "guard",
@@ -80,6 +73,7 @@ function updateGuard(model){
                         }
                         catch(err){
                             model.info=err
+                            model.emit(globalCallBackRouter,model)
                         }
                         global.emit("userAccountSetup",model)
                         model.emit("userAccountService",model)

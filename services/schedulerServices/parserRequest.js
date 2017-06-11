@@ -4,7 +4,6 @@
 var request = require('request');
 
 // event names
-var globalDataAccessCall;
 var globalCallBackRouter;
 
 // global event emitter
@@ -20,23 +19,26 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,globalDACall,callback,url){
-    globalEmitter.on(globalCall,parserRequestSetup)
+function init(globalEmitter,globalCall,callback,url){
     global=globalEmitter;
-    globalDataAccessCall=globalDACall;
+    globalEmitter.on(globalCall,parserRequestSetup)
     globalCallBackRouter=callback;
     commonAccessUrl=url;
 }
 
+//function to setup model's event listener
 function parserRequestSetup(model)
 {
     model.once("parserRequest",parserRequestFactory);
 }
 
+
+//function to create new 'parserRequest' function for each model
 function parserRequestFactory(model){
     new parserRequest(model);
 }
 
+//function to make a request to the Parser Api
 function parserRequest(model){
 
     var parserRequestBody={
@@ -73,8 +75,9 @@ function parserRequest(model){
                                 model.emit("healthCheckup",model)
                             }
                             else{
-                                    console.log("PARSER DETAILS NOT PRESENT")
-                                 
+                                console.log("PARSER DETAILS NOT PRESENT")
+                                model.info="PARSER DETAILS NOT PRESENT"
+                                model.emit(globalCallBackRouter,model)
                             }
                     }
                 else if(response){

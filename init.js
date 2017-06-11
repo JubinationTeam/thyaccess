@@ -72,18 +72,18 @@ const thyrocareApiKey="JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwot
 function init(){
                         
     controllerInit(routerInitModel);
-    getLeadDetails(globalEmitter,'thyrocareBook',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey);
-    postOrder(globalEmitter,'postOrder',globalDataAccessCall,globalCallBackRouter,thyrocareUrls.postOrder,thyrocareApiKey);
+    getLeadDetails(globalEmitter,'thyrocareBook',globalCallBackRouter,commonAccessUrl,guardKey);
+    postOrder(globalEmitter,'postOrder',globalCallBackRouter,thyrocareUrls.postOrder,thyrocareApiKey);
     updateRepository(globalEmitter,'updateRepositorySetup',globalCallBackRouter,globalDataAccessCall,commonAccessUrl,guardKey);
     userAccount(globalEmitter,'userAccountSetup',globalCallBackRouter,commonAccessUrl);
     updateLocalDatabase(globalEmitter,'updateLocalDatabaseSetup',globalCallBackRouter,globalDataAccessCall)
-    awsApi(globalEmitter,'awsApiSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
+    awsApi(globalEmitter,'awsApiSetup',globalCallBackRouter,commonAccessUrl)
     reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)
-    xmlRequest(globalEmitter,'xmlRequestSetup',globalDataAccessCall,globalCallBackRouter)
-    parserRequest(globalEmitter,'parserRequestSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl)
-    healthCheckup(globalEmitter,'healthCheckupSetup',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
-    readGuard(globalEmitter,'readGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
-    updateGuard(globalEmitter,'updateGuardSetUp',globalDataAccessCall,globalCallBackRouter,commonAccessUrl,guardKey)
+    xmlRequest(globalEmitter,'xmlRequestSetup',globalCallBackRouter)
+    parserRequest(globalEmitter,'parserRequestSetup',globalCallBackRouter,commonAccessUrl)
+    healthCheckup(globalEmitter,'healthCheckupSetup',globalCallBackRouter,commonAccessUrl,guardKey)
+    readGuard(globalEmitter,'readGuardSetUp',globalCallBackRouter,commonAccessUrl,guardKey)
+    updateGuard(globalEmitter,'updateGuardSetUp',globalCallBackRouter,commonAccessUrl,guardKey)
     genericDataAccess(dataAccessInitModel);
 
 }
