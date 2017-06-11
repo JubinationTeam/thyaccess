@@ -75,8 +75,8 @@ function updateGuard(model){
                             model.info=err
                             model.emit(globalCallBackRouter,model)
                         }
-                        global.emit("userAccountSetup",model)
-                        model.emit("userAccountService",model)
+//                        global.emit("userAccountSetup",model)
+//                        model.emit("userAccountService",model)
                 }
                 else if(response){
                             model.info=response;

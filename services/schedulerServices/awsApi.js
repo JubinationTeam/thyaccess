@@ -75,14 +75,13 @@ function awsApiCall(model){
                             
                             console.log("LINK PRESENT")
                             model.data.s3Link=body.link
-                            console.log(body.link)
                            
                             commonVar.add()
                             commonVar.check()
                             model.aws=true;
         
-//                            global.emit("readGuardSetUp",model)
-//                            model.emit("readGuard",model)
+                            global.emit("readGuardSetUp",model)
+                            model.emit("readGuard",model)
 //                            
 //                            global.emit("xmlRequestSetup",model)
 //                            model.emit("xmlRequestService",model)
