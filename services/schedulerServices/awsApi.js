@@ -86,7 +86,7 @@ function awsApiCall(model){
                             model.info=err
 //                            console.log(JSON.parse(body))
                             console.log("error caught")
-                        }
+                        }    
                        
                 }
                 else if(error){
