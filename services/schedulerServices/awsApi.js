@@ -84,7 +84,7 @@ function awsApiCall(model){
                             commonVar.add()
                             commonVar.check()
                             model.info=err
-                            console.log(JSON.parse(body))
+//                            console.log(JSON.parse(body))
                             console.log("error caught")
                         }
                        

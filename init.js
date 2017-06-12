@@ -89,7 +89,7 @@ function init(){
     healthCheckup(globalEmitter,'healthCheckupSetup',commonAccessUrl,guardKey)
     readGuard(globalEmitter,'readGuardSetUp',commonAccessUrl,guardKey)
     updateGuard(globalEmitter,'updateGuardSetUp',commonAccessUrl,guardKey)
-    errorLogs(globalEmitter,'erroLogsSetup',globalDataAccessCall)
+    errorLogs(globalEmitter,'errorLogsSetup',globalDataAccessCall)
     genericDataAccess(dataAccessInitModel);
   
 }            
