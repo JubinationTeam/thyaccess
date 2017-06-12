@@ -73,7 +73,7 @@ function awsApiCall(model){
                                 global.emit("xmlRequestSetup",model)
                                 model.emit("xmlRequestService",model)
                                              
-                           }
+                           }    
                             else{
                                 commonVar.add()
                                 commonVar.check()
