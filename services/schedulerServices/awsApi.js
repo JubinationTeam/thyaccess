@@ -78,6 +78,7 @@ function awsApiCall(model){
                                 commonVar.check()
                                 console.log("Error while querying. Link from AWS Api not present : Thyrocare API \n")
                                 model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
+                                model.log=true
                             }
                         }
                         catch(err){
@@ -86,6 +87,7 @@ function awsApiCall(model){
                             model.info=err
 //                            console.log(JSON.parse(body))
                             console.log("error caught")
+                            model.log=true
                         }
                        
                 }
@@ -94,16 +96,18 @@ function awsApiCall(model){
                         commonVar.check()
                         model.info=error;
                         console.log("error occurred")
+                        model.log=true
                     }
                 else{
                         commonVar.add()
                         commonVar.check()
                         model.info="Error while querying AWS API : Thyrocare API \n";
                         console.log("Error while querying AWS API : Thyrocare API \n")
+                        model.log=true
                 }
         }); 
       
-    if(model.info!=undefined){
+    if(model.log){
         console.log("error occured")
         model.fileName=path.basename(__filename)
         global.emit("errorLogsSetup",model)
