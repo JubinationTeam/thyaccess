@@ -63,7 +63,7 @@ function xmlRequest(model){
                             }
                             catch(err){
                                 model.info=err
-                            }
+                            }  
                             
                     }   
                 else if(error){
