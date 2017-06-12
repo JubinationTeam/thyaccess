@@ -39,6 +39,8 @@ function createHealthCheckupDocFactory(model){
 //function to create a new document in the Guard module's 'HealthCheckup' schema
 function createHealthCheckupDoc(model){
      
+    console.log("health checkup")
+    
     var commonAccessDetails={
                         "mod"       : "guard",
                         "operation" : "create",
