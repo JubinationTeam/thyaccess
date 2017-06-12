@@ -12,7 +12,7 @@ var getLeadDetails=require('./services/realTimeServices/getLeadDetails.js').init
 var updateRepository=require('./services/realTimeServices/updateRepository.js').init;
 
 //scheduler services
-//var reportScheduler=require('./services/schedulerServices/reportScheduler.js').init;
+var reportScheduler=require('./services/schedulerServices/reportScheduler.js').init;
 var updateLocalDatabase=require('./services/schedulerServices/updateLocalDatabase.js').init;
 var awsApi=require('./services/schedulerServices/awsApi.js').init;
 var xmlRequest=require('./services/schedulerServices/xmlRequest.js').init;
@@ -83,7 +83,7 @@ function init(){
     userAccount(globalEmitter,'userAccountSetup',commonAccessUrl);
     updateLocalDatabase(globalEmitter,'updateLocalDatabaseSetup',globalDataAccessCall)
     awsApi(globalEmitter,'awsApiSetup',commonAccessUrl)
-//    reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)
+    reportScheduler(globalEmitter,globalDataAccessCall,globalCallBackRouter)
     xmlRequest(globalEmitter,'xmlRequestSetup')
     parserRequest(globalEmitter,'parserRequestSetup',commonAccessUrl)
     healthCheckup(globalEmitter,'healthCheckupSetup',commonAccessUrl,guardKey)
