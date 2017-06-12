@@ -52,7 +52,7 @@ function init(globalEmitter,globalDACall,callback){
         }
     },1000)
 }
-
+  
 //function to create a new model for each document 
 function postDataAccessCallback(modelPreLoop){
     
