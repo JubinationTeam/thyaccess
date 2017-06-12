@@ -69,7 +69,7 @@ function userAccount(model){
                 }
                                        
         }   
-        else if(error){          
+        else if(error){            
                 commonVar.add()
                 commonVar.check()
                 model.info=error;
