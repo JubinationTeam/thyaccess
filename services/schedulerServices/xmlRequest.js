@@ -47,6 +47,7 @@ function xmlRequest(model){
             
                 if(body){
                             try{
+                                console.log("IM IN XML")
                                 body=JSON.parse(body);
                                 if(body.URL){
                                     model.thyrocareXmlUrl=body.URL; 
