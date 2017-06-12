@@ -92,7 +92,7 @@ function init(){
     errorLogs(globalEmitter,'erroLogsSetup',globalDataAccessCall)
     genericDataAccess(dataAccessInitModel);
   
-}    
+}      
 
 //exports
 module.exports.init=init;
