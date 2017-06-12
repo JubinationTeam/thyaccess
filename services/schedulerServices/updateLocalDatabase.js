@@ -33,7 +33,7 @@ function updateLocalDatabase(model){
     model.emit(model.dbOpsType,model)
     commonVar.add()
     commonVar.check()
-}
+}   
 
 //exports
 module.exports.init=init;
