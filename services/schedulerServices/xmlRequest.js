@@ -65,7 +65,7 @@ function xmlRequest(model){
                                 model.info=err
                             }  
                             
-                    }                        
+                    }                          
                 else if(error){
                             model.info=error;
                     }
