@@ -65,7 +65,7 @@ function awsApiCall(model){
                             
                                 model.data.s3Link=body.link
                                 model.aws=true;
-
+                                console.log("AWS link present")
                                 global.emit("readGuardSetUp",model)
                                 model.emit("readGuard",model)
                                                             

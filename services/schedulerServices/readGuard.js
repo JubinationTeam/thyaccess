@@ -68,6 +68,8 @@ function readGuard(model,modelIndex){
                     
                 if(body){       
                         try{
+                            console.log("IM in read")
+                            
                             body=JSON.parse(body);
                             model.docToUpdateInLead=body.data[0]._id
                         

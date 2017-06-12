@@ -66,6 +66,7 @@ function updateGuard(model){
      
               if(body){       
                         try{
+                            console.log("Im in update")
                             body=JSON.parse(body);
                             model.body=body
                             global.emit("userAccountSetup",model)

@@ -24,7 +24,7 @@ function setup(model){
 
 //function to update the local database's 'ThyrocareLead' schema
 function updateLocalDatabase(model){
-    
+    console.log("Im in update local database")
     model.schema=thyrocareLead
     model.dbOpsType="update"
     model.id=model.data._id
