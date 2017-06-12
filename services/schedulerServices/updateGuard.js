@@ -2,9 +2,10 @@
 
 //node dependencies
 var request = require('request');
+var path = require('path');
 
-// event names
-var globalCallBackRouter;
+//user defined dependencies
+var commonVar=require('./helper/staticVariables.js')
 
 //Guard Access Variables
 var commonAccessUrl;
@@ -20,10 +21,9 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,url,key){
+function init(globalEmitter,globalCall,url,key){
     global=globalEmitter;
     globalEmitter.on(globalCall,setup)
-    globalCallBackRouter=callback;
     commonAccessUrl=url;
     guardKey=key;
 }
@@ -65,33 +65,35 @@ function updateGuard(model){
         request(updateRequestParams, function (error, response, body){
      
               if(body){       
-                  
-                        console.log("IM IN UPDATE GUARD::::::::")
                         try{
                             body=JSON.parse(body);
-                            model.info=body
+                            model.body=body
+                            global.emit("userAccountSetup",model)
+                            model.emit("userAccountService",model)
                         }
                         catch(err){
+                            commonVar.add()
+                            commonVar.check()
                             model.info=err
-                            model.emit(globalCallBackRouter,model)
                         }
-                        global.emit("userAccountSetup",model)
-                        model.emit("userAccountService",model)
                 }
-                else if(response){
-                            model.info=response;
-                            model.emit(globalCallBackRouter,model)
-                    }
                 else if(error){
-                            model.info=error;
-                            model.emit(globalCallBackRouter,model)
+                    commonVar.add()
+                    commonVar.check()
+                    model.info=error
                     }
                 else{
+                    commonVar.add()
+                    commonVar.check()
                     model.info="Error while updating guard : Thyrocare API \n"
-                    console.log("Error while updating guard : Thyrocare API \n");
-                    model.emit(globalCallBackRouter,model)
                 }
-        }); 
+        });
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
     
 }
 

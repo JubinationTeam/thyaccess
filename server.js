@@ -4,6 +4,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var path = require('path');
 
 // user-defined dependencies
 //var connection=require('./app/dbConnection.js');
@@ -26,7 +27,7 @@ function init(){
     //mongodb connection
     dbConnection();
     console.log("Server is listening");
-    initFunction(); 
+    initFunction();
     //controller call
     require('jubi-express-controller').process(app);
  

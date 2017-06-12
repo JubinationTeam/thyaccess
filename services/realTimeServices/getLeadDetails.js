@@ -95,7 +95,6 @@ function setupLeadDetailsFunction(model){
                     model.info="Error while fetching Lead Details : Thyrocare API \n"+body;
                     model.emit(globalCallBackRouter,model)
                 }
-
             
         }); 
     }

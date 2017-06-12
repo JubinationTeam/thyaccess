@@ -3,9 +3,10 @@
 //node dependencies
 var request = require('request');
 var eventEmitter = require('events');
+var path = require('path');
 
-// event names
-var globalCallBackRouter;
+//user defined dependencies
+var commonVar=require('./helper/staticVariables.js')
 
 // global event emitter
 var global;
@@ -21,11 +22,10 @@ var headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,url){
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,url){
     global=globalEmitter;
+    globalEmitter.on(globalCall,setup)
     commonAccessUrl=url;
-    globalCallBackRouter=callback;
 }
 
 //function to setup model's event listener
@@ -41,11 +41,10 @@ function userAccountFactory(model){
 
 //function to call the 'User Account' Api
 function userAccount(model){
-    console.log("IM IN USER ACCOUNT:::::::")
     
     var userAccountSetup={
                         "mod"       : "userAccount",
-                        "data"      : model.info
+                        "data"      : model.body
                     };
     
     var userAccountRequestParams     = {  
@@ -59,31 +58,34 @@ function userAccount(model){
         if(body){      
                 try{
                     body=JSON.parse(body);
+                    global.emit("updateLocalDatabaseSetup",model)
+                    model.emit("updateLocalDatabase",model)
                 }
                 catch(err){
-                    console.log(body)                  
-                    console.log(err)      
+                    commonVar.add()
+                    commonVar.check()
                     model.info=err
-                    console.log("ERR IN Thyrocare APi User acc")
-                    model.emit(globalCallBackRouter,model)
                 }
-                global.emit("updateLocalDatabaseSetup",model)
-                model.emit("updateLocalDatabase",model)
                                        
-        }                   
-        else if(response){
-                model.info=response;
-                model.emit(globalCallBackRouter,model)
-        }
+        }   
         else if(error){
+                commonVar.add()
+                commonVar.check()
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
+                commonVar.add()
+                commonVar.check()
                 model.info="Error while accessing User Account Service : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
         }
+        
     }) 
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 
 }
 

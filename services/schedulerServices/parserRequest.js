@@ -2,14 +2,12 @@
 
 //node dependencies
 var request = require('request');
-
-// event names
-var globalCallBackRouter;
+var path = require('path');
 
 // global event emitter
 var global;
 
-//Guard Access Variables
+//common access variable
 var commonAccessUrl;
 
 //global variables
@@ -19,10 +17,9 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,url){
+function init(globalEmitter,globalCall,url){
     global=globalEmitter;
     globalEmitter.on(globalCall,parserRequestSetup)
-    globalCallBackRouter=callback;
     commonAccessUrl=url;
 }
 
@@ -62,38 +59,34 @@ function parserRequest(model){
 
                 if(body){
                             try{
-                                body=JSON.parse(body);
+                                body=JSON.parse(body)
+                                if(!body.error){
+                                    model.data.testReport=body
+                                    global.emit("healthCheckupSetup",model)
+                                    model.emit("healthCheckup",model)
+                                }
+                                else{
+                                    model.info="Parser details not present"
+                                }
                             }
                             catch(err){
-                                console.log(err)
                                 model.info=err
                             }
-                            if(!body.error){
-                                console.log("PARSER DETAILS PRESENT")
-                                model.data.testReport=body
-                                console.log(body+"BODDYYYYYYYYY")      
-                                global.emit("healthCheckupSetup",model)
-                                model.emit("healthCheckup",model)
-                            }
-                            else{
-                                console.log("PARSER DETAILS NOT PRESENT")
-                                model.info="PARSER DETAILS NOT PRESENT"
-                                model.emit(globalCallBackRouter,model)
-                            }
+                            
                     }     
-                else if(response){
-                            model.info=response;
-                            model.emit(globalCallBackRouter,model)
-                    }
                 else if(error){
                             model.info=error;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else{
-                            model.info="Error while requesting XML Url : Thyrocare API \n"+body;
-                            model.emit(globalCallBackRouter,model)
+                            model.info="Error while quering Parser Api : Thyrocare API \n"+body;
                 }
-    })  
+    }) 
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 }
 
 //exports

@@ -1,12 +1,13 @@
 'use strict'
+//node dependencies
+var request = require('request');
+var eventEmitter = require('events');
+var path = require('path');
 
 //user defined dependencies
 var ThyrocareLead=require('./../../models/schemas/thyrocareLead.js')
 var commonVar=require('./helper/staticVariables.js')
 
-//node dependencies
-var request = require('request');
-var eventEmitter = require('events');
 
 //booking date threshold value
 const days=20;
@@ -17,7 +18,6 @@ const event = new eventClass()
 
 // event names
 var globalDataAccessCall;
-var globalCallBackRouter;
 
 // global event emitter
 var global;
@@ -70,7 +70,7 @@ function postDataAccessCallback(modelPreLoop){
         }
 }
 
-//function to check the document's validity against various parameters
+//function to check the document's validity against various conditions
 function checkValidity(model){
             var apptDate 
             if(!apptDate){
@@ -112,45 +112,43 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     
                     try{
                             body=JSON.parse(body);
+                            if(body.URL){
+                                console.log("REPORT URL PRESENT")
+                                model.thyrocarePdfUrl=body.URL; 
+                                global.emit("awsApiSetup",model)
+                                model.emit("awsService",model)
+
+                            }
+                            else{
+                                console.log("REPORT URL NOT PRESENT")
+                                model.info="REPORT URL NOT PRESENT"
+                                commonVar.add()
+                                commonVar.check()
+                            }
                         }
                     catch(err){
-                            console.log(err)
+                            commonVar.add()
+                            commonVar.check()
                             model.info=err
-                            model.emit(globalCallBackRouter,model)
                         }
-                    if(body.URL){
-                        console.log("REPORT URL PRESENT");
-                        model.thyrocarePdfUrl=body.URL; 
-                        global.emit("awsApiSetup",model)
-                        model.emit("awsService",model)
-    
-                        }
-                    else{
-                        console.log("REPORT URL NOT PRESENT")
-                        commonVar.add()
-                        commonVar.check()
-                    }
-                    
            }
-            else if(response){
-                    model.info=response;
-                    commonVar.add()
-                    commonVar.check()
-                    model.emit(globalCallBackRouter,model)
-                    }
             else if(error){
                     model.info=error;
                     commonVar.add()
                     commonVar.check()
-                    model.emit(globalCallBackRouter,model)
                 }
             else{
-                    console.log("Error while scheduling report : Thyrocare API ");
+                    model.info="Error while scheduling report : Thyrocare API "
                     commonVar.add()
                     commonVar.check()
-                    model.emit(globalCallBackRouter,model)
             }
     })
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 }
 
 //exports

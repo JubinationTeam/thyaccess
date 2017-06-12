@@ -2,9 +2,7 @@
 
 //node dependencies
 var request = require('request');
-
-// event names
-var globalCallBackRouter;
+var path = require('path');
 
 // global event emitter
 var global;
@@ -20,10 +18,9 @@ var headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,url,key){
+function init(globalEmitter,globalCall,url,key){
     global=globalEmitter;
     globalEmitter.on(globalCall,setup)
-    globalCallBackRouter=callback;
     commonAccessUrl=url;
     guardKey=key;
 }
@@ -77,27 +74,22 @@ function createHealthCheckupDoc(model){
                 }
                 catch(err){
                     model.info=err
-                    model.emit(globalCallBackRouter,model)
                 }
-                    console.log("HealthChechup Document created successfully")
-                   
-        }      
-        else if(response){
-                model.info=response;
-                model.emit(globalCallBackRouter,model)
-        }
+        } 
         else if(error){
                 model.info=error;
-                model.emit(globalCallBackRouter,model)
         }
         else{
-                console.log("Error while updating lead details : Thyrocare API \n"+body)
-                model.info="Error while updating lead details : Thyrocare API \n"+body;
-                model.emit(globalCallBackRouter,model)
+                model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
         }
     
-    }) 
-
+    })
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 }
 
 //exports

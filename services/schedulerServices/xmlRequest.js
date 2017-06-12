@@ -2,12 +2,10 @@
 
 //node dependencies
 var request = require('request');
+var path = require('path');
 
 //user defined dependencies
 var commonVar=require('./helper/staticVariables.js')
-
-// event names
-var globalCallBackRouter;
 
 // global event emitter
 var global;
@@ -19,10 +17,9 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback){
+function init(globalEmitter,globalCall){
     global=globalEmitter;
     globalEmitter.on(globalCall,xmlRequestSetup)
-    globalCallBackRouter=callback;
 }
 
 //function to setup model's event listener
@@ -50,40 +47,36 @@ function xmlRequest(model){
             
                 if(body){
                             try{
-                            body=JSON.parse(body);
+                                body=JSON.parse(body);
+                                if(body.URL){
+                                    model.thyrocareXmlUrl=body.URL; 
+
+                                    global.emit("parserRequestSetup",model)
+                                    model.emit("parserRequest",model)
+
+                                }
+                                else{
+                                    model.info="XML REPORT URL NOT PRESENT"
+                                }
                             }
                             catch(err){
                                 model.info=err
-                                console.log(err)
                             }
-                            if(body.URL){
-                                console.log("XML REPORT URL PRESENT")
-                                model.thyrocareXmlUrl=body.URL; 
-
-                                global.emit("parserRequestSetup",model)
-                                model.emit("parserRequest",model)
-      
-                            }
-                            else{
-                                console.log("XML REPORT URL NOT PRESENT")
-                                model.info="XML REPORT URL NOT PRESENT"
-                                model.emit(globalCallBackRouter,model)
-                            }
-                    }
-                else if(response){
-                            model.info=response;
-                            model.emit(globalCallBackRouter,model)
+                            
                     }
                 else if(error){
                             model.info=error;
-                            model.emit(globalCallBackRouter,model)
                     }
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
-                            model.emit(globalCallBackRouter,model)
                 }
-           
-    })  
+    })
+    
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 }
 
 //exports

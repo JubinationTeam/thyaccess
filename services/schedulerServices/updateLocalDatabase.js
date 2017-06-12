@@ -1,22 +1,20 @@
 'use strict'
 
-//node dependencies
-
+//user-defined dependencies
 var thyrocareLead=require('./../../models/schemas/thyrocareLead.js')
+var commonVar=require('./helper/staticVariables.js')
 
 // event names
 var globalDataAccessCall;
-var globalCallBackRouter;
 
 // global event emitter
 var global;
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,globalDACall){   
-    globalEmitter.on(globalCall,setup)
+function init(globalEmitter,globalCall,globalDACall){   
     global=globalEmitter;
+    globalEmitter.on(globalCall,setup)
     globalDataAccessCall=globalDACall;
-    globalCallBackRouter=callback;
 }
 
 //function to setup model's event listener
@@ -26,18 +24,15 @@ function setup(model){
 
 //function to update the local database's 'ThyrocareLead' schema
 function updateLocalDatabase(model){
+    commonVar.add()
+    commonVar.check()
+    
     model.schema=thyrocareLead
     model.dbOpsType="update"
     model.id=model.data._id
     model.data={"reportStatus":true};
     global.emit(globalDataAccessCall,model)
     model.emit(model.dbOpsType,model)
-}
-
-//function to call the router
-function callHandler(model){
-    model.info=model.status;
-    model.emit(globalCallBackRouter,model)
 }
 
 //exports

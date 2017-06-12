@@ -2,17 +2,15 @@
 
 //node dependencies
 var request = require('request');
+var path = require('path');
 
 //user defined dependencies
 var commonVar=require('./helper/staticVariables.js')
 
-// event names
-var globalCallBackRouter;
-
 // global event emitter
 var global;
 
-//guard Access Variables
+//common access variable
 var commonAccessUrl;
 
 //global variables
@@ -22,10 +20,9 @@ const headers     = {
                 }
 
 // function to instantiate
-function init(globalEmitter,globalCall,callback,url){
+function init(globalEmitter,globalCall,url){
     global=globalEmitter;
     globalEmitter.on(globalCall,setup)
-    globalCallBackRouter=callback;
     commonAccessUrl=url
 }
 
@@ -42,8 +39,6 @@ function setupAwsFactory(model){
 
 //function to call the AWS Api 
 function awsApiCall(model){
-    
-    console.log("IM IN AWSAPI")
     
         var awsParams={
                         "mod"       : "aws",
@@ -66,56 +61,48 @@ function awsApiCall(model){
                 if(body){ 
                         try{
                             body=JSON.parse(body);
-                        }
-                        catch(err){
-                            model.info=err
-                            model.emit(globalCallBackRouter,model)
-                        }
-                        if(body.link){
+                             if(body.link){
                             
-                            console.log("LINK PRESENT")
-                            model.data.s3Link=body.link
-                           
-                            commonVar.add()
-                            commonVar.check()
-                            model.aws=true;
-        
-                            global.emit("readGuardSetUp",model)
-                            model.emit("readGuard",model)
+                                model.data.s3Link=body.link
+                                model.aws=true;
+
+                                global.emit("readGuardSetUp",model)
+                                model.emit("readGuard",model)
                                                             
-//                            global.emit("xmlRequestSetup",model)
-//                            model.emit("xmlRequestService",model)
+                                global.emit("xmlRequestSetup",model)
+                                model.emit("xmlRequestService",model)
                                    
                            }
-                        else{
+                            else{
+                                commonVar.add()
+                                commonVar.check()
+                                model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
+                            }
+                        }
+                        catch(err){
                             commonVar.add()
                             commonVar.check()
-                            console.log("Error while querying.Link from AWS API not present : Thyrocare API \n");
-                            model.info="Error while querying.Link from AWS API not present : Thyrocare API \n";
-                            model.emit(globalCallBackRouter,model)
+                            model.info=err
                         }
+                       
                 }
-                else if(response){
-                        commonVar.add()
-                        commonVar.check()
-                        model.info=response;
-                        model.emit(globalCallBackRouter,model)
-                    }
                 else if(error){
                         commonVar.add()
                         commonVar.check()
                         model.info=error;
-                        model.emit(globalCallBackRouter,model)
                     }
                 else{
                         commonVar.add()
                         commonVar.check()
-                        console.log("Error while querying AWS API : Thyrocare API \n");
                         model.info="Error while querying AWS API : Thyrocare API \n";
-                        model.emit(globalCallBackRouter,model)
                 }
         }); 
     
+    if(model.info){
+        model.fileName=path.basename(__filename)
+        global.emit("errorLogsSetup",model)
+        model.emit("errorLogs",model)
+    }
 }
 
 //exports
