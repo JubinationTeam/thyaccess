@@ -70,8 +70,8 @@ function awsApiCall(model){
                                 global.emit("readGuardSetUp",model)
                                 model.emit("readGuard",model)
                                                                 
-                                global.emit("xmlRequestSetup",model)
-                                model.emit("xmlRequestService",model)
+//                                global.emit("xmlRequestSetup",model)
+//                                model.emit("xmlRequestService",model)
                                              
                            }    
                             else{
