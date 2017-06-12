@@ -90,7 +90,7 @@ function awsApiCall(model){
                        
                 }
                 else if(error){
-                        commonVar.add()
+                        commonVar.add()      
                         commonVar.check()
                         model.info=error;
                         console.log("error occurred")
