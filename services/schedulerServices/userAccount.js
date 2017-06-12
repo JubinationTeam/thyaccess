@@ -55,7 +55,9 @@ function userAccount(model){
                     }
     request(userAccountRequestParams, function (error, response, body){
                                                                                        
-        if(body){      
+        if(body){ 
+                console.log(JSON.stringify(JSON.parse(body)))
+            
                 try{
                     body=JSON.parse(body);
                     console.log("Im in user account")
