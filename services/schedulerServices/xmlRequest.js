@@ -49,6 +49,7 @@ function xmlRequest(model){
                             try{
                                 console.log("IM IN XML")
                                 body=JSON.parse(body);
+                                console.log(body)
                                 if(body.URL){
                                     model.thyrocareXmlUrl=body.URL; 
 
@@ -71,8 +72,6 @@ function xmlRequest(model){
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
                 }
-              
-                console.log(model.info)
             
                 if(model.info){
                             model.fileName=path.basename(__filename)

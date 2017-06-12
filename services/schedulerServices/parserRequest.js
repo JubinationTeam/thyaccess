@@ -57,6 +57,8 @@ function parserRequest(model){
     
         request(parserRequestParams, function (error, response, body){
 
+            console.log("Im in parser")
+            
                 if(body){
                             try{
                                 body=JSON.parse(body)
@@ -80,6 +82,8 @@ function parserRequest(model){
                 else{
                             model.info="Error while quering Parser Api : Thyrocare API \n"+body;
                 }
+                console.log(model.info)
+
                 if(model.info){
                     model.fileName=path.basename(__filename)
                     global.emit("errorLogsSetup",model)
