@@ -90,6 +90,6 @@ function userAccount(model){
     }) 
 
 }
-
+        
 //exports
 module.exports.init=init;
