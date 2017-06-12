@@ -71,7 +71,7 @@ function xmlRequest(model){
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
                 }
-            
+              
                 console.log(model.info)
             
                 if(model.info){
