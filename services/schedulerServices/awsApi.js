@@ -102,7 +102,7 @@ function awsApiCall(model){
                         console.log("Error while querying AWS API : Thyrocare API \n")
                 }
         }); 
-    
+      
     if(model.info){
         console.log("error occured")
         model.fileName=path.basename(__filename)
