@@ -76,7 +76,6 @@ function awsApiCall(model){
                             else{
                                 commonVar.add()
                                 commonVar.check()
-                                console.log("Error while querying. Link from AWS Api not present : Thyrocare API \n")
                                 model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
                             }
                         }
@@ -99,10 +98,8 @@ function awsApiCall(model){
                         commonVar.add()
                         commonVar.check()
                         model.info="Error while querying AWS API : Thyrocare API \n";
-                        console.log("Error while querying AWS API : Thyrocare API \n")
                         }
                 if(model.info){
-                        console.log("error occured")
                         model.fileName=path.basename(__filename)
                         global.emit("errorLogsSetup",model)
                         model.emit("errorLogs",model)
