@@ -101,12 +101,12 @@ function awsApiCall(model){
                         model.info="Error while querying AWS API : Thyrocare API \n";
                         console.log("Error while querying AWS API : Thyrocare API \n")
                         }
-                    if(model.info){
-                console.log("error occured")
-                model.fileName=path.basename(__filename)
-                global.emit("errorLogsSetup",model)
-                model.emit("errorLogs",model)
-            }
+                if(model.info){
+                        console.log("error occured")
+                        model.fileName=path.basename(__filename)
+                        global.emit("errorLogsSetup",model)
+                        model.emit("errorLogs",model)
+                    }
             
         });    
       

@@ -79,14 +79,13 @@ function userAccount(model){
                 commonVar.check()
                 model.info="Error while accessing User Account Service : Thyrocare API \n"+body;
         }
+        if(model.info){
+                model.fileName=path.basename(__filename)
+                global.emit("errorLogsSetup",model)
+                model.emit("errorLogs",model)
+            }
         
     }) 
-    
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
 
 }
 

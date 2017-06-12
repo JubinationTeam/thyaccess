@@ -71,13 +71,14 @@ function xmlRequest(model){
                 else{
                             model.info="Error while requesting XML Url : Thyrocare API \n"+body;
                 }
+                if(model.info){
+                            model.fileName=path.basename(__filename)
+                            global.emit("errorLogsSetup",model)
+                            model.emit("errorLogs",model)
+                        }
     })
     
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
+    
 }
 
 //exports

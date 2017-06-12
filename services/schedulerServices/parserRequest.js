@@ -80,13 +80,14 @@ function parserRequest(model){
                 else{
                             model.info="Error while quering Parser Api : Thyrocare API \n"+body;
                 }
+                if(model.info){
+                    model.fileName=path.basename(__filename)
+                    global.emit("errorLogsSetup",model)
+                    model.emit("errorLogs",model)
+                }
     }) 
     
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
+    
 }
 
 //exports

@@ -96,14 +96,14 @@ function readGuard(model,modelIndex){
                     commonVar.check()
                     model.info="Error while reading guard : Thyrocare API \n"
                 }
-            
+                if(model.info){
+                    model.fileName=path.basename(__filename)
+                    global.emit("errorLogsSetup",model)
+                    model.emit("errorLogs",model)
+                }
         }); 
     
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
+    
 }
 
 //exports

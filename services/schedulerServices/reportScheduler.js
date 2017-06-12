@@ -142,13 +142,14 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     commonVar.add()
                     commonVar.check()
             }
+             if(model.info){
+                    model.fileName=path.basename(__filename)
+                    global.emit("errorLogsSetup",model)
+                    model.emit("errorLogs",model)
+            }
     })
     
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
+   
 }
 
 //exports

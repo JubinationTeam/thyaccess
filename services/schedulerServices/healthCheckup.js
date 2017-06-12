@@ -69,27 +69,28 @@ function createHealthCheckupDoc(model){
     request(requestParams, function (error, response, body){
         
         if(body){
-                try{
-                    body=JSON.parse(body);
-                }
-                catch(err){
-                    model.info=err
-                }
+            try{
+                body=JSON.parse(body);
+            }
+            catch(err){
+                model.info=err
+            }
         } 
         else if(error){
-                model.info=error;
+            model.info=error;
         }
         else{
-                model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
+            model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
+        }
+        if(model.info){
+            model.fileName=path.basename(__filename)
+            global.emit("errorLogsSetup",model)
+            model.emit("errorLogs",model)
         }
     
     })
     
-    if(model.info){
-        model.fileName=path.basename(__filename)
-        global.emit("errorLogsSetup",model)
-        model.emit("errorLogs",model)
-    }
+    
 }
 
 //exports
