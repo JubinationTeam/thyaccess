@@ -91,7 +91,7 @@ function init(){
     updateGuard(globalEmitter,'updateGuardSetUp',commonAccessUrl,guardKey)
     errorLogs(globalEmitter,'erroLogsSetup',globalDataAccessCall)
     genericDataAccess(dataAccessInitModel);
-
+  
 }
 
 //exports
