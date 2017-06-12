@@ -39,7 +39,7 @@ function setupAwsFactory(model){
 
 //function to call the AWS Api 
 function awsApiCall(model){
-    
+    console.log("Im in AWS")
         var awsParams={
                         "mod"       : "aws",
                         "operation" : "awsQuery",
