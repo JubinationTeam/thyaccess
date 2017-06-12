@@ -105,7 +105,7 @@ function awsApiCall(model){
                         console.log("Error while querying AWS API : Thyrocare API \n")
                         model.log=true
                 }
-        }); 
+        });    
       
     if(model.log){
         console.log("error occured")
