@@ -24,8 +24,6 @@ function setup(model){
 
 //function to update the local database's 'ThyrocareLead' schema
 function updateLocalDatabase(model){
-    commonVar.add()
-    commonVar.check()
     
     model.schema=thyrocareLead
     model.dbOpsType="update"
@@ -33,6 +31,8 @@ function updateLocalDatabase(model){
     model.data={"reportStatus":true};
     global.emit(globalDataAccessCall,model)
     model.emit(model.dbOpsType,model)
+    commonVar.add()
+    commonVar.check()
 }
 
 //exports
