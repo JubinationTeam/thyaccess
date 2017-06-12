@@ -30,7 +30,7 @@ function createLog(model){
         "errorDetails":model.info,
         "fileName": model.fileName,
         "thyrocareLeadId": model.data.thyrocareLeadId,
-        "time": new Date().toISOString().slice(0,10).toString()
+        "time": new Date().toISOString()
     };
     global.emit(globalDataAccessCall,model)
     model.emit(model.dbOpsType,model)
