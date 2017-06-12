@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird');
 
 // creating primary schema
 var errorLogs={
-    error: String,
+    errorDetails: String,
     fileName: String,
     thyrocareLeadId: String,
     time: String
