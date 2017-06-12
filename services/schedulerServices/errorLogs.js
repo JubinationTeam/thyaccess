@@ -27,7 +27,7 @@ function createLog(model){
     model.schema=errorLogs
     model.dbOpsType="create"
     model.data={
-        "error":model.info,
+        "errorDetails":model.info,
         "fileName": model.fileName,
         "thyrocareLeadId": model.data.thyrocareLeadId,
         "time": new Date().toISOString().slice(0,10).toString()
