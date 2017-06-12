@@ -103,7 +103,7 @@ function awsApiCall(model){
                 }
         }); 
       
-//    if(model.info!=null){
+//    if(model.info!=null){   
         console.log("error occured")
         model.fileName=path.basename(__filename)
         global.emit("errorLogsSetup",model)
