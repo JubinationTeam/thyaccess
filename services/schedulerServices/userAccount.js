@@ -54,15 +54,12 @@ function userAccount(model){
                             body    : JSON.stringify(userAccountSetup)
                     }
     request(userAccountRequestParams, function (error, response, body){
-                            
-        console.log("IM IN USER ACC")
-        
+                                    
         if(body){ 
-            
                 try{
                     body=JSON.parse(body);
                     
-                    console.log(JSON.parse(body.data.error+"TEST"))
+                    console.log(JSON.stringify(body.data.error)+"TEST"))
 //                    global.emit("updateLocalDatabaseSetup",model)
 //                    model.emit("updateLocalDatabase",model)
                 }                  
