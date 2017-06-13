@@ -58,16 +58,16 @@ function userAccount(model){
         if(body){ 
                 try{
                     body=JSON.parse(body);
-                    
+                    console.log(JSON.stringify(body)+"TTTEEESTSTSTST")
                     if(!body.data.error){
-                        console.log("All good")
+                        console.log("all good")
+//                        global.emit("updateLocalDatabaseSetup",model)
+//                        model.emit("updateLocalDatabase",model)
                     }
                     else{
-                        model.info="error"
+                        model.info=body.data.error
                     }
                     
-//                    global.emit("updateLocalDatabaseSetup",model)
-//                    model.emit("updateLocalDatabase",model)
                 }                  
                 catch(err){
                     commonVar.add()
