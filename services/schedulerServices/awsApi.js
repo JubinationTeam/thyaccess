@@ -72,8 +72,8 @@ function awsApiCall(model){
 
                                     model.dataBackup=model.data
 
-//                                    global.emit("xmlRequestSetup",model)
-//                                    model.emit("xmlRequestService",model)
+                                    global.emit("xmlRequestSetup",model)
+                                    model.emit("xmlRequestService",model)
                                 }  
                                 else{
                                     commonVar.add()
