@@ -85,7 +85,7 @@ function createHealthCheckupDoc(model){
         else{
             model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
         }
-        console.log(model.info+"MMMooodel info")
+        console.log(model.info+"MMMooodel infooo")
         
         if(model.info){
             model.fileName=path.basename(__filename)
