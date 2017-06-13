@@ -63,7 +63,7 @@ function userAccount(model){
                     console.log(JSON.parse(body.data.error+"TEST"))
 //                    global.emit("updateLocalDatabaseSetup",model)
 //                    model.emit("updateLocalDatabase",model)
-                }     
+                }                  
                 catch(err){
                     commonVar.add()
                     commonVar.check()
