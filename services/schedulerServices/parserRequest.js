@@ -62,7 +62,7 @@ function parserRequest(model){
                 if(body){
                             try{
                                 body=JSON.parse(body)
-                                console.log(body+"ppppppAAARser body")
+                                console.log(JSON.stringify(body)+"ppppppAAARser body")
                                 if(!body.error){
                                     model.data.testReport=body
                                     global.emit("healthCheckupSetup",model)
