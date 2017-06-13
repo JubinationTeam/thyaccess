@@ -33,7 +33,7 @@ function init(globalEmitter,globalDACall,callback){
     
     globalDataAccessCall=globalDACall
        
-    setTimeout(function(){
+    setInterval(function(){
     if(commonVar.getBatchDoneBool()){
         commonVar.setBatchDone()
         
@@ -50,7 +50,7 @@ function init(globalEmitter,globalDACall,callback){
                         model.emit(model.dbOpsType,model)
 
         }
-    },1000)
+    },7200000)
 }
   
 //function to create a new model for each document 
