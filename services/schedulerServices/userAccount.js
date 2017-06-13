@@ -60,7 +60,7 @@ function userAccount(model){
                     body=JSON.parse(body);
                     console.log(JSON.stringify(body)+"TTTEEESTSTSTST")
                     if(body.error){
-                        console.log("all good")
+                        console.log("alls good")
 //                        global.emit("updateLocalDatabaseSetup",model)
 //                        model.emit("updateLocalDatabase",model)
                     }
