@@ -62,6 +62,7 @@ function parserRequest(model){
                 if(body){
                             try{
                                 body=JSON.parse(body)
+                                console.log(body+"ppppppAAARser body")
                                 if(!body.error){
                                     model.data.testReport=body
                                     global.emit("healthCheckupSetup",model)
@@ -82,7 +83,6 @@ function parserRequest(model){
                 else{
                             model.info="Error while quering Parser Api : Thyrocare API \n"+body;
                 }
-                console.log(model.info)
 
                 if(model.info){
                     model.fileName=path.basename(__filename)
