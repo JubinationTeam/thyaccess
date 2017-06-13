@@ -35,7 +35,7 @@ function xmlRequestFactory(model){
 
 //function to make an XML Report link request to Thyrocare Api
 function xmlRequest(model){
-      model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.data.thyrocareLeadId+"/xml/"+model.data.mobile+"/Myreport"
+      model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.dataBackup.thyrocareLeadId+"/xml/"+model.dataBackup.mobile+"/Myreport"
         
         var xmlRequestParams   = {
                                 url     : model.thyrocareReportUrl,

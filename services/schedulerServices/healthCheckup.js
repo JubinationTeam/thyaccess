@@ -48,13 +48,13 @@ function createHealthCheckupDoc(model){
                                         "key"   : guardKey,
                                         "schema": "HealthCheckup",
                                         "data"  : {
-                                                    "mobile": model.data.mobile,
-                                                    "healthCheckupId": model.data.thyrocareLeadId,
+                                                    "mobile": model.dataBackup.mobile,
+                                                    "healthCheckupId": model.dataBackup.thyrocareLeadId,
                                                     "reportViewed": 0,
                                                     "reportDownloaded": 0,
                                                     "vendorId": "thyrocare",
-                                                    "reportUrl": model.data.s3link,
-                                                    "report": model.data.testReport,
+                                                    "reportUrl": model.dataBackup.s3link,
+                                                    "report": model.dataBackup.testReport,
                                                     "tags": []
                                                         
                                                  }

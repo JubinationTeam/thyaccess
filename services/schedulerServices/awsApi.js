@@ -67,9 +67,11 @@ function awsApiCall(model){
                                 model.aws=true;
                                 console.log("AWS link present")
                                  
-//                                global.emit("readGuardSetUp",model)
-//                                model.emit("readGuard",model)
-                                                                
+                                global.emit("readGuardSetUp",model)
+                                model.emit("readGuard",model)
+                                
+                                model.dataBackup=model.data
+                                 
                                 global.emit("xmlRequestSetup",model)
                                 model.emit("xmlRequestService",model)
                                                  
