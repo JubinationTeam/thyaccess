@@ -59,12 +59,12 @@ function userAccount(model){
                 try{
                     body=JSON.parse(body);
                     console.log(JSON.stringify(body)+"TTTEEESTSTSTST")
-                    if(body.error){
+                    if(body.error){      
                         console.log("alls good")
 //                        global.emit("updateLocalDatabaseSetup",model)
 //                        model.emit("updateLocalDatabase",model)
                     }
-                    else{
+                    else{    
                         model.info=body.error
                     }
                     
