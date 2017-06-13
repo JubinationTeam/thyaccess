@@ -72,7 +72,7 @@ function createHealthCheckupDoc(model){
         
         if(body){
             try{
-                body=JSON.parse(body)  
+                body=JSON.parse(body)        
             }
             catch(err){
                 model.info=err
