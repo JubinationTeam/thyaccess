@@ -59,7 +59,7 @@ function createHealthCheckupDoc(model){
                                                         
                                                  }
                                     }    
-                    };
+                    };   
                
     var requestParams     = {
                             url     : commonAccessUrl,
