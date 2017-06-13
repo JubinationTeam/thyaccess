@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 // user-defined dependencies
-//var connection=require('./app/dbConnection.js');
-var initFunction=require('./init.js').init;
-var dbConnection=require('./dbConnection/dbConnection.js');
+var initFunction=require('./app/init.js').init;
+var dbConnection=require('./app/dbConnection/dbConnection.js');
 
 // json parsing
 var jsonParser = bodyParser.json()
@@ -29,6 +28,6 @@ function init(){
     console.log("Server is listening");
     initFunction();
     //controller call
-    require('jubi-express-controller').process(app);
+    require('jubi-express-controller').process(app); 
  
 };
