@@ -58,7 +58,7 @@ function createHealthCheckupDoc(model){
                                                     "tags": []
                                                         
                                                  }
-                                    }    
+                                    }        
                     };   
                
     var requestParams     = {
