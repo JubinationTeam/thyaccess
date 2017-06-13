@@ -58,7 +58,7 @@ function createHealthCheckupDoc(model){
                                                     "tags": []
                                                         
                                                  }
-                                    } 
+                                    }    
                     };
                
     var requestParams     = {
@@ -73,6 +73,7 @@ function createHealthCheckupDoc(model){
         if(body){
             try{
                 body=JSON.parse(body);
+                console.log(body)
             }
             catch(err){
                 model.info=err
