@@ -39,6 +39,7 @@ function parserRequestFactory(model){
 function parserRequest(model){
 
      console.log(JSON.stringify(model.data)+"model data at parser before request")
+    console.log(model.data.mobile)
     
     var parserRequestBody={
                         "mod"       : "parser",
