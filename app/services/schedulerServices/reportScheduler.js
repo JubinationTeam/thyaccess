@@ -32,7 +32,7 @@ const headers     = {
 function init(globalEmitter,globalDACall,callback){
     
     globalDataAccessCall=globalDACall
-    
+       
     setTimeout(function(){
     if(commonVar.getBatchDoneBool()){
         commonVar.setBatchDone()
