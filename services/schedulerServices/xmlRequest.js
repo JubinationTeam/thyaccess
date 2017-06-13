@@ -35,10 +35,6 @@ function xmlRequestFactory(model){
 
 //function to make an XML Report link request to Thyrocare Api
 function xmlRequest(model){
-     
-    console.log(model.dataBackup+"backup")
-    
-    console.log("IM IN XML")
     model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq2vsbb3X6QF1ae@ZIVmdQA9WF1YThw1)S6eHx@lA1hwota9fIXMT/GETREPORTS/"+model.dataBackup.thyrocareLeadId+"/xml/"+model.dataBackup.mobile+"/Myreport"
         
         var xmlRequestParams   = {
@@ -51,9 +47,7 @@ function xmlRequest(model){
             
                 if(body){
                             try{
-                                console.log("IM IN XML")
                                 body=JSON.parse(body);
-                                console.log(body)
                                 if(body.URL){
                                     model.thyrocareXmlUrl=body.URL; 
 

@@ -129,7 +129,6 @@ function postOrder(model){
 function gettingResponseDetails(model,body){
     
     model.thyroDoc=body
-    console.log(model.thyroDoc)
     
     if(model.thyroDoc.ADDRESS&&model.thyroDoc.BOOKED_BY&&model.thyroDoc.EMAIL&&model.thyroDoc.MOBILE){
             model.data.tags[0].status=model.thyroDoc.STATUS          

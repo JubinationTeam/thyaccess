@@ -57,7 +57,6 @@ function init(globalEmitter,globalDACall,callback){
 function postDataAccessCallback(modelPreLoop){
     
         commonVar.setTotalDocs(modelPreLoop.status.length)
-        console.log("Total Documents::::"+commonVar.totalDocs)
     
         modelPreLoop.status.forEach(function(){});
 
@@ -113,14 +112,12 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     try{
                             body=JSON.parse(body);
                             if(body.URL){
-                                console.log("REPORT URL PRESENT")
                                 model.thyrocarePdfUrl=body.URL; 
                                 global.emit("awsApiSetup",model)
                                 model.emit("awsService",model)
 
                             }
                             else{
-                                console.log("REPORT URL NOT PRESENT")
                                 model.info="REPORT URL NOT PRESENT"
                                 commonVar.add()
                                 commonVar.check()

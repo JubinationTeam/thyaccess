@@ -48,8 +48,6 @@ function parserRequest(model){
                         }
                     };
     
-    console.log(JSON.stringify(parserRequestBody)+" parserRequestBody")
-    
     var parserRequestParams     = {
                             url     : commonAccessUrl,
                             method  : 'POST',
@@ -59,12 +57,9 @@ function parserRequest(model){
     
         request(parserRequestParams, function (error, response, body){
 
-            console.log("Im in parser")
-            
                 if(body){
                             try{
                                 body=JSON.parse(body)
-//                                console.log(JSON.stringify(body)+"pppppAAARser body")
                                 if(!body.error){
                                     model.dataBackup.testReport=body
                                     global.emit("healthCheckupSetup",model)

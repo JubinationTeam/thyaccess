@@ -39,7 +39,6 @@ function setupAwsFactory(model){
 
 //function to call the AWS Api 
 function awsApiCall(model){
-    console.log("Im in AWS")
         var awsParams={
                         "mod"       : "aws",
                         "operation" : "awsQuery",
@@ -65,15 +64,14 @@ function awsApiCall(model){
                             
                                 model.data.s3Link=body.link
                                 model.aws=true;
-                                console.log("AWS link present")
                                  
                                 global.emit("readGuardSetUp",model)
                                 model.emit("readGuard",model)
                                 
                                 model.dataBackup=model.data
                                  
-                                global.emit("xmlRequestSetup",model)
-                                model.emit("xmlRequestService",model)
+//                                global.emit("xmlRequestSetup",model)
+//                                model.emit("xmlRequestService",model)
                                                  
                            }    
                             else{
@@ -86,8 +84,6 @@ function awsApiCall(model){
                             commonVar.add()
                             commonVar.check()
                             model.info=err
-//                            console.log(JSON.parse(body))
-                            console.log("error caught")
                         }    
                        
                 }
@@ -95,7 +91,6 @@ function awsApiCall(model){
                         commonVar.add()      
                         commonVar.check()
                         model.info=error;
-                        console.log("error occurred")
                     }
                 else{
                         commonVar.add()
