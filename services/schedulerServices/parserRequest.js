@@ -50,7 +50,7 @@ function parserRequest(model){
                         }
                     };
     
-    console.log(parserRequestBody+" parserRequestBody")
+    console.log(JSON.stringify(parserRequestBody)+" parserRequestBody")
     
     var parserRequestParams     = {
                             url     : commonAccessUrl,
