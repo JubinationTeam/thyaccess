@@ -80,7 +80,7 @@ function awsApiCall(model){
                                 model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
                             }
                         }
-                        catch(err){  
+                        catch(err){             
                             commonVar.add()
                             commonVar.check()
                             model.info=err
