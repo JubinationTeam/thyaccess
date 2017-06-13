@@ -38,6 +38,8 @@ function parserRequestFactory(model){
 //function to make a request to the Parser Api
 function parserRequest(model){
 
+     console.log(JSON.stringify(model.data)+"model data at parser before request")
+    
     var parserRequestBody={
                         "mod"       : "parser",
                         "data"      : {

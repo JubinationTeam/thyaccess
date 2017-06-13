@@ -38,9 +38,9 @@ function createHealthCheckupDocFactory(model){
 
 //function to create a new document in the Guard module's 'HealthCheckup' schema
 function createHealthCheckupDoc(model){
-    console.log(JSON.stringify(model.data)+"model data health checkup")
-    console.log("health checkup")
-    console.log(model.data.thyrocareLeadId)
+//    console.log(JSON.stringify(model.data)+"model data health checkup")
+//    console.log("health checkup")
+//    console.log(model.data.thyrocareLeadId)
     var commonAccessDetails={
                         "mod"       : "guard",
                         "operation" : "create",
@@ -73,7 +73,6 @@ function createHealthCheckupDoc(model){
         if(body){
             try{
                 body=JSON.parse(body)     
-                console.log(body+"HHHealth check up body")
             }
             catch(err){
                 model.info=err
@@ -85,7 +84,6 @@ function createHealthCheckupDoc(model){
         else{
             model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
         }
-        console.log(model.info+"MMMooodel infooo")
         
         if(model.info){
             model.fileName=path.basename(__filename)
