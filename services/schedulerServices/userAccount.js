@@ -54,7 +54,9 @@ function userAccount(model){
                             body    : JSON.stringify(userAccountSetup)
                     }
     request(userAccountRequestParams, function (error, response, body){
-                                                                                       
+                            
+        console.log("IM IN USER ACC")
+        
         if(body){ 
             
                 try{
