@@ -40,7 +40,7 @@ function createHealthCheckupDocFactory(model){
 function createHealthCheckupDoc(model){
      
     console.log("health checkup")
-    
+    console.log(model.data.thyrocareLeadId)
     var commonAccessDetails={
                         "mod"       : "guard",
                         "operation" : "create",
@@ -72,7 +72,8 @@ function createHealthCheckupDoc(model){
         
         if(body){
             try{
-                body=JSON.parse(body)        
+                body=JSON.parse(body)     
+                console.log(body+"HHHealth check up body")
             }
             catch(err){
                 model.info=err
@@ -84,6 +85,8 @@ function createHealthCheckupDoc(model){
         else{
             model.info="Error while creating Health Checkup Document : Thyrocare API \n"+body;
         }
+        console.log(model.info+"MMMooodel info")
+        
         if(model.info){
             model.fileName=path.basename(__filename)
             global.emit("errorLogsSetup",model)
