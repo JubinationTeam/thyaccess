@@ -74,7 +74,13 @@ function setupLeadDetailsFunction(model){
                     
                 if(body){
                         try{
-                            body=JSON.parse(body);
+                            if(!body.error){
+                                body=JSON.parse(body);
+                            }
+                            else{
+                                model.info=body.error
+                                model.emit(globalCallBackRouter,model)
+                            }
                         }
                         catch(err){
                             model.info=err

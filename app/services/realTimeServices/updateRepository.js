@@ -69,15 +69,19 @@ function update(model){
         
         if(body){
                 try{
-                    body=JSON.parse(body);
+                    if(!body.error){
+                        body=JSON.parse(body);
+                    }
+                    else{
+                        model.info=body.error
+                        model.emit(globalCallBackRouter,model)
+                    }
                 }
                 catch(err){
                     model.info=err
                     model.emit(globalCallBackRouter,model)
                 }
                 model.leadData=model.data;
-                global.emit("createAccountSetup",model)
-                model.emit("createAccountService",model)
                 model.beneficiaryIndex=0
                 saveReportDetailsLocally(model);
                     
