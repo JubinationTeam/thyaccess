@@ -48,15 +48,20 @@ function xmlRequest(model){
                 if(body){
                             try{
                                 body=JSON.parse(body);
-                                if(body.URL){
-                                    model.thyrocareXmlUrl=body.URL; 
+                                if(!body.error){
+                                    if(body.URL){
+                                        model.thyrocareXmlUrl=body.URL; 
 
-                                    global.emit("parserRequestSetup",model)
-                                    model.emit("parserRequest",model)
+                                        global.emit("parserRequestSetup",model)
+                                        model.emit("parserRequest",model)
 
+                                    }
+                                    else{
+                                        model.info="XML REPORT URL NOT PRESENT"
+                                    }
                                 }
                                 else{
-                                    model.info="XML REPORT URL NOT PRESENT"
+                                    model.info=body.error
                                 }
                             }
                             catch(err){

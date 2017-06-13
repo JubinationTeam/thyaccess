@@ -60,24 +60,31 @@ function awsApiCall(model){
                 if(body){ 
                         try{
                             body=JSON.parse(body);
-                             if(body.link){
                             
-                                model.data.s3Link=body.link
-                                model.aws=true;
-                                 
-                                global.emit("readGuardSetUp",model)
-                                model.emit("readGuard",model)
-                                
-                                model.dataBackup=model.data
-                                 
-//                                global.emit("xmlRequestSetup",model)
-//                                model.emit("xmlRequestService",model)
-                                                 
-                           }    
+                            if(!body.error){
+                                 if(body.link){
+
+                                    model.data.s3Link=body.link
+                                    model.aws=true;
+
+                                    global.emit("readGuardSetUp",model)
+                                    model.emit("readGuard",model)
+
+                                    model.dataBackup=model.data
+
+//                                    global.emit("xmlRequestSetup",model)
+//                                    model.emit("xmlRequestService",model)
+                                }  
+                                else{
+                                    commonVar.add()
+                                    commonVar.check()
+                                    model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
+                                }
+                            }
                             else{
                                 commonVar.add()
                                 commonVar.check()
-                                model.info="Error while querying. Link from AWS Api not present : Thyrocare API \n";
+                                model.info=body.error
                             }
                         }
                         catch(err){               

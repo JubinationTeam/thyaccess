@@ -111,18 +111,26 @@ model.thyrocareReportUrl="https://www.thyrocare.com/APIs/order.svc/JJ0YYAYwNcmnq
                     
                     try{
                             body=JSON.parse(body);
-                            if(body.URL){
-                                model.thyrocarePdfUrl=body.URL; 
-                                global.emit("awsApiSetup",model)
-                                model.emit("awsService",model)
+                            if(!body.error){
+                                if(body.URL){
+                                    model.thyrocarePdfUrl=body.URL; 
+                                    global.emit("awsApiSetup",model)
+                                    model.emit("awsService",model)
 
+                                }
+                                else{
+                                    model.info="REPORT URL NOT PRESENT"
+                                    commonVar.add()
+                                    commonVar.check()
+                                }
                             }
                             else{
-                                model.info="REPORT URL NOT PRESENT"
                                 commonVar.add()
                                 commonVar.check()
+                                model.info=body.error
                             }
                         }
+                
                     catch(err){
                             commonVar.add()
                             commonVar.check()

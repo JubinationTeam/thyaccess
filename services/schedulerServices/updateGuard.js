@@ -67,9 +67,16 @@ function updateGuard(model){
               if(body){       
                         try{
                             body=JSON.parse(body);
-                            model.body=body
-                            global.emit("userAccountSetup",model)
-                            model.emit("userAccountService",model)
+                            if(!body.error){
+                                model.body=body
+                                global.emit("userAccountSetup",model)
+                                model.emit("userAccountService",model)
+                            }
+                            else{
+                                commonVar.add()
+                                commonVar.check()
+                                model.info=body.error
+                            }
                         }
                         catch(err){
                             commonVar.add()
@@ -87,6 +94,7 @@ function updateGuard(model){
                     commonVar.check()
                     model.info="Error while updating guard : Thyrocare API \n"
                 }
+            
                 if(model.info){
                     model.fileName=path.basename(__filename)
                     global.emit("errorLogsSetup",model)
@@ -94,9 +102,6 @@ function updateGuard(model){
                 }
             
         });
-    
-    
-    
 }
 
 //exports
