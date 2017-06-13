@@ -76,7 +76,7 @@ function parserRequest(model){
                                 model.info=err
                             }
                             
-                    }                                  
+                    }                                       
                 else if(error){
                             model.info=error;
                     }
