@@ -50,12 +50,12 @@ function createHealthCheckupDoc(model){
                                         "data"  : {
                                                     "mobile": model.data.mobile,
                                                     "healthCheckupId": model.data.thyrocareLeadId,
-                                                    reportViewed: 0,
-                                                    reportDownloaded: 0,
-                                                    vendorId: "thyrocare",
-                                                    reportUrl: model.data.s3link,
-                                                    report: model.data.testReport,
-                                                    tags: []
+                                                    "reportViewed": 0,
+                                                    "reportDownloaded": 0,
+                                                    "vendorId": "thyrocare",
+                                                    "reportUrl": model.data.s3link,
+                                                    "report": model.data.testReport,
+                                                    "tags": []
                                                         
                                                  }
                                     } 
