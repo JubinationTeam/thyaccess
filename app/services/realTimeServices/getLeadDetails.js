@@ -130,13 +130,11 @@ function getLeadDocument(model,body){
         &&  model.data.modeOfPayment
         &&  model.data.tags[0].hardCopy
         &&  model.data.tags[0].handlingCharges
-        &&  model.data.tags[0].noOfPersons
         &&  model.data.tags[0].beneficiaryDetails
-        &&  (model.data.tags[0].noOfPersons==model.data.tags[0].beneficiaryDetails.length)
         &&  model.validity
        
         ){
-    
+            model.data.tags[0].noOfPersons==model.data.tags[0].beneficiaryDetails.length
             model.documentToUpdateId=model.data._id
             global.emit("postOrder",model)
             model.emit("postOrderService",model)
